@@ -45,8 +45,31 @@ Given a single number, a matrix constructor creates a diagonal matrix.
 
 ```{.c}
 mat2_t id2x2 = mat2(1.0);
+/*
+  ┌          ┐
+  │ 1.0  0.0 │
+  │ 0.0  1.0 │
+  └          ┘
+ */
+
 mat3_t id3x3 = mat3(1.0);
+/*
+  ┌               ┐
+  │ 1.0  0.0  0.0 │
+  │ 0.0  1.0  0.0 │
+  │ 0.0  0.0  1.0 │
+  └               ┘
+ */
+
 mat4_t id4x4 = mat4(1.0);
+/*
+  ┌                    ┐
+  │ 1.0  0.0  0.0  0.0 │
+  │ 0.0  1.0  0.0  0.0 │
+  │ 0.0  0.0  1.0  0.0 │
+  │ 0.0  0.0  0.0  1.0 │
+  └                    ┘
+ */
 ```
 
 Or a matrix can be filled directly, filling each *column* (not row) first.
@@ -75,7 +98,7 @@ mat3_t m3x3 = mat3(
   │ 3.0  6.0  9.0 │
   └               ┘
  */
- 
+
 mat4_t m4x4 = mat4(
      1.0,  2.0,  3.0,  4.0, // first column
      5.0,  6.0,  7.0,  8.0, // second column
