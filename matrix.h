@@ -3,15 +3,6 @@
  *
  * The functions, as much as possible in C, mimic the GLM C++ library and GLSL.
  *
- * However, some conventions differ, namely
- *   - The types use a _t suffix to avoid clashing with the constructor functions.
- *   - Constructors have the same name as the type, as in GLSL.
- *
- * For example, in GLM you might do
- *     GLM::mat4 m(1.0)
- * but in this library, instead use
- *     mat4_t m = mat4(1.0)
- *
  * As in GLM and GLSL, matrices are column-major. Therefore, m[i] would be the ith column-vector.
  *
  * The functions are overloaded, using macros around type-dependent _Generic selection, so that
@@ -84,9 +75,9 @@ union vec4 {
 #endif
 };
 
-typedef union vec2 vec2_t;
-typedef union vec3 vec3_t;
-typedef union vec4 vec4_t;
+typedef union vec2 vec2;
+typedef union vec3 vec3;
+typedef union vec4 vec4;
 
 /* Using a union or struct means the matrix will be passed by value, however
  * it also means we don't get to use arrays subscripting directly, which is
@@ -94,47 +85,47 @@ typedef union vec4 vec4_t;
  */
 
 union mat2 {
-	vec2_t cols[2];
+	vec2 cols[2];
 };
 
 union mat3 {
-	vec3_t cols[3];
+	vec3 cols[3];
 };
 
 union mat4 {
-	vec4_t cols[4];
+	vec4 cols[4];
 };
 
-typedef union mat2 mat2_t;
-typedef union mat3 mat3_t;
-typedef union mat4 mat4_t;
+typedef union mat2 mat2;
+typedef union mat3 mat3;
+typedef union mat4 mat4;
 
 /* Set all components to the same value */
-vec2_t vec2f1(float);
-vec3_t vec3f1(float);
-vec4_t vec4f1(float);
+vec2 vec2f1(float);
+vec3 vec3f1(float);
+vec4 vec4f1(float);
 
 /* Set each component to the given value */
-vec2_t vec2f2(float, float);
-vec3_t vec3f3(float, float, float);
-vec4_t vec4f4(float, float, float, float);
+vec2 vec2f2(float, float);
+vec3 vec3f3(float, float, float);
+vec4 vec4f4(float, float, float, float);
 
 /*
  * Fill from other vectors
  */
 
-vec2_t vec2v3(vec3_t);
-vec2_t vec2v4(vec4_t);
+vec2 vec2v3(vec3);
+vec2 vec2v4(vec4);
 
-vec3_t vec3v2f1(vec2_t, float);
-vec3_t vec3f1v2(float, vec2_t);
-vec3_t vec3v4(vec4_t);
+vec3 vec3v2f1(vec2, float);
+vec3 vec3f1v2(float, vec2);
+vec3 vec3v4(vec4);
 
-vec4_t vec4v3f1(vec3_t, float);
-vec4_t vec4f1v3(float, vec3_t);
-vec4_t vec4v2v2(vec2_t, vec2_t);
-vec4_t vec4v2f2(vec2_t, float, float);
-vec4_t vec4f2v2(float, float, vec2_t);
+vec4 vec4v3f1(vec3, float);
+vec4 vec4f1v3(float, vec3);
+vec4 vec4v2v2(vec2, vec2);
+vec4 vec4v2f2(vec2, float, float);
+vec4 vec4f2v2(float, float, vec2);
 
 /*
  * Using default (rather than float) so that number literals are
@@ -143,29 +134,29 @@ vec4_t vec4f2v2(float, float, vec2_t);
 
 #define VEC2_NARGS_1(A) _Generic((A)    \
     , default: vec2f1                   \
-    , vec3_t:  vec2v3                   \
-    , vec4_t:  vec2v4                   \
+    , vec3:  vec2v3                     \
+    , vec4:  vec2v4                     \
     )(A)
 #define VEC2_NARGS_2(A, B) vec2f2(A, B)
 
 #define VEC3_NARGS_1(A) _Generic((A)    \
     , default: vec3f1                   \
-    , vec4_t:  vec3v4                   \
+    , vec4:  vec3v4                     \
     )(A)
 #define VEC3_NARGS_2(A, B) _Generic((A) \
-    , vec2_t: vec3v2f1                  \
+    , vec2: vec3v2f1                    \
     , float:  vec3f1v2                  \
     )(A, B)
 #define VEC3_NARGS_3(A, B, C) vec3f3(A, B, C)
 
 #define VEC4_NARGS_1(A) vec4f1(A)
 #define VEC4_NARGS_2(A, B) _Generic((A) \
-    , vec2_t: vec4v2v2                  \
-    , vec3_t: vec4v3f1                  \
+    , vec2: vec4v2v2                    \
+    , vec3: vec4v3f1                    \
     , float:  vec4f1v3                  \
     )(A, B)
 #define VEC4_NARGS_3(A, B, C) _Generic((A) \
-    , vec2_t: vec4v2f2                     \
+    , vec2: vec4v2f2                       \
     , float:  vec4f2v2                     \
     )(A, B, C)
 #define VEC4_NARGS_4(A, B, C, D) vec4f4(A, B, C, D)
@@ -182,45 +173,45 @@ vec4_t vec4f2v2(float, float, vec2_t);
 #define vec4(...) OVERLOAD_ARGS_4(__VA_ARGS__, VEC4_NARGS_4, VEC4_NARGS_3, VEC4_NARGS_2, VEC4_NARGS_1)(__VA_ARGS__)
 
 #define GENERIC_VEC(FN, A) _Generic((A) \
-    , vec2_t: FN ## v2                  \
-    , vec3_t: FN ## v3                  \
-    , vec4_t: FN ## v4                  \
+    , vec2: FN ## v2                    \
+    , vec3: FN ## v3                    \
+    , vec4: FN ## v4                    \
     )
 
-bool equalsv2(vec2_t, vec2_t);
-bool equalsv3(vec3_t, vec3_t);
-bool equalsv4(vec4_t, vec4_t);
+bool equalsv2(vec2, vec2);
+bool equalsv3(vec3, vec3);
+bool equalsv4(vec4, vec4);
 #define equals(A, B) GENERIC_VEC(dot, A)(A, B)
 
-float dotv2(vec2_t, vec2_t);
-float dotv3(vec3_t, vec3_t);
-float dotv4(vec4_t, vec4_t);
+float dotv2(vec2, vec2);
+float dotv3(vec3, vec3);
+float dotv4(vec4, vec4);
 #define dot(A, B) GENERIC_VEC(dot, A)(A, B)
 
-float lengthv2(vec2_t);
-float lengthv3(vec3_t);
-float lengthv4(vec4_t);
+float lengthv2(vec2);
+float lengthv3(vec3);
+float lengthv4(vec4);
 #define length(A) GENERIC_VEC(length, A)(A)
 
-vec2_t normalizev2(vec2_t);
-vec3_t normalizev3(vec3_t);
-vec4_t normalizev4(vec4_t);
+vec2 normalizev2(vec2);
+vec3 normalizev3(vec3);
+vec4 normalizev4(vec4);
 #define normalize(A) GENERIC_VEC(normalize, A)(A)
 
 /* Diagonal matrix with the diagonal elements all of the given value */
-mat2_t mat2f1(float);
-mat3_t mat3f1(float);
-mat4_t mat4f1(float);
+mat2 mat2f1(float);
+mat3 mat3f1(float);
+mat4 mat4f1(float);
 
 /* Fills matrix with the values from the smaller matrix, starting in the upper left */
-mat3_t mat3m2(mat2_t);
-mat4_t mat4m2(mat2_t);
-mat4_t mat4m3(mat3_t);
+mat3 mat3m2(mat2);
+mat4 mat4m2(mat2);
+mat4 mat4m3(mat3);
 
 /* Fills matrix directly - column major */
-mat2_t mat2f4(float, float, float, float);
-mat3_t mat3f9(float, float, float, float, float, float, float, float, float);
-mat4_t mat4f16(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
+mat2 mat2f4(float, float, float, float);
+mat3 mat3f9(float, float, float, float, float, float, float, float, float);
+mat4 mat4f16(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
 
 #define MAT2_NARGS_1(A) _Generic((A) \
     , float:   mat2f1                \
@@ -233,7 +224,7 @@ mat4_t mat4f16(float, float, float, float, float, float, float, float, float, fl
 
 #define MAT3_NARGS_1(A) _Generic((A) \
     , float:   mat3f1                \
-    , mat2_t:  mat3m2                \
+    , mat2:  mat3m2                  \
     )(A)
 
 #define MAT3_NARGS_9(A, ...) _Generic((A) \
@@ -243,8 +234,8 @@ mat4_t mat4f16(float, float, float, float, float, float, float, float, float, fl
 
 #define MAT4_NARGS_1(A) _Generic((A) \
     , float:   mat4f1                \
-    , mat2_t:  mat4m2                \
-    , mat3_t:  mat4m3                \
+    , mat2:  mat4m2                  \
+    , mat3:  mat4m3                  \
     )(A)
 
 #define MAT4_NARGS_16(A, ...) _Generic((A) \
@@ -258,8 +249,8 @@ mat4_t mat4f16(float, float, float, float, float, float, float, float, float, fl
 
 /*
 #define GENERIC_MAT(FN, A) _Generic((A) \
-    , mat2_t: FN ## m2                  \
-    , mat3_t: FN ## m3                  \
-    , mat4_t: FN ## m4                  \
+    , mat2: FN ## m2                    \
+    , mat3: FN ## m3                    \
+    , mat4: FN ## m4                    \
     )
 */

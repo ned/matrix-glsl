@@ -9,94 +9,94 @@
  * Single-argument vector constructors
  */
 
-vec2_t
+vec2
 vec2f1(float x) {
-	return (vec2_t) {{ x, x }};
+	return (vec2) {{ x, x }};
 }
 
-vec3_t
+vec3
 vec3f1(float x) {
-	return (vec3_t) {{ x, x, x }};
+	return (vec3) {{ x, x, x }};
 }
 
-vec4_t
+vec4
 vec4f1(float x) {
-	return (vec4_t) {{ x, x, x, x }};
+	return (vec4) {{ x, x, x, x }};
 }
 
 /*
  * Complete vector constructors
  */
 
-vec2_t
+vec2
 vec2f2(float x, float y) {
-	return (vec2_t) {{ x, y }};
+	return (vec2) {{ x, y }};
 }
 
-vec3_t
+vec3
 vec3f3(float x, float y, float z) {
-	return (vec3_t) {{ x, y, z }};
+	return (vec3) {{ x, y, z }};
 }
 
-vec4_t
+vec4
 vec4f4(float x, float y, float z, float w) {
-	return (vec4_t) {{ x, y, z, w }};
+	return (vec4) {{ x, y, z, w }};
 }
 
 /*
  * Constructor from other vectors
  */
 
-vec2_t
-vec2v3(vec3_t v) {
-	return (vec2_t) {{ v.x, v.y }};
+vec2
+vec2v3(vec3 v) {
+	return (vec2) {{ v.x, v.y }};
 }
 
-vec2_t
-vec2v4(vec4_t v) {
-	return (vec2_t) {{ v.x, v.y }};
-}
-
-
-vec3_t
-vec3v2f1(vec2_t v, float z) {
-	return (vec3_t) {{ v.x, v.y, z }};
-}
-
-vec3_t
-vec3f1v2(float x, vec2_t v) {
-	return (vec3_t) {{ x, v.x, v.y }};
-}
-
-vec3_t
-vec3v4(vec4_t v) {
-	return (vec3_t) {{ v.x, v.y, v.z }};
+vec2
+vec2v4(vec4 v) {
+	return (vec2) {{ v.x, v.y }};
 }
 
 
-vec4_t
-vec4v3f1(vec3_t v, float w) {
-	return (vec4_t) {{ v.x, v.y, v.z, w }};
+vec3
+vec3v2f1(vec2 v, float z) {
+	return (vec3) {{ v.x, v.y, z }};
 }
 
-vec4_t
-vec4f1v3(float x, vec3_t v) {
-	return (vec4_t) {{ x, v.x, v.y, v.z }};
+vec3
+vec3f1v2(float x, vec2 v) {
+	return (vec3) {{ x, v.x, v.y }};
 }
 
-vec4_t
-vec4v2v2(vec2_t a, vec2_t b) {
-	return (vec4_t) {{ a.x, a.y, b.x, b.y }};
+vec3
+vec3v4(vec4 v) {
+	return (vec3) {{ v.x, v.y, v.z }};
 }
 
-vec4_t
-vec4v2f2(vec2_t v, float z, float w) {
-	return (vec4_t) {{ v.x, v.y, z, w }};
+
+vec4
+vec4v3f1(vec3 v, float w) {
+	return (vec4) {{ v.x, v.y, v.z, w }};
 }
 
-vec4_t
-vec4f2v2(float x, float y, vec2_t v) {
-	return (vec4_t) {{ x, y, v.x, v.y }};
+vec4
+vec4f1v3(float x, vec3 v) {
+	return (vec4) {{ x, v.x, v.y, v.z }};
+}
+
+vec4
+vec4v2v2(vec2 a, vec2 b) {
+	return (vec4) {{ a.x, a.y, b.x, b.y }};
+}
+
+vec4
+vec4v2f2(vec2 v, float z, float w) {
+	return (vec4) {{ v.x, v.y, z, w }};
+}
+
+vec4
+vec4f2v2(float x, float y, vec2 v) {
+	return (vec4) {{ x, y, v.x, v.y }};
 }
 
 
@@ -107,19 +107,19 @@ vec4f2v2(float x, float y, vec2_t v) {
  */
 
 bool
-equalsv2(vec2_t a, vec2_t b) {
+equalsv2(vec2 a, vec2 b) {
 #include <assert.h>
 	assert(false);
 	return a.x == b.x && a.y == b.y;
 }
 
 bool
-equalsv3(vec3_t a, vec3_t b) {
+equalsv3(vec3 a, vec3 b) {
 	return a.x == b.x && a.y == b.y && a.z == b.z;
 }
 
 bool
-equalsv4(vec4_t a, vec4_t b) {
+equalsv4(vec4 a, vec4 b) {
 	return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
 }
 
@@ -127,26 +127,26 @@ equalsv4(vec4_t a, vec4_t b) {
  * Single argument matrix constructors
  */
 
-mat2_t
+mat2
 mat2f1(float x) {
-	return (mat2_t) {{
+	return (mat2) {{
 		vec2(x, 0.0),
 		vec2(0.0, x),
 	}};
 }
 
-mat3_t
+mat3
 mat3f1(float x) {
-	return (mat3_t) {{
+	return (mat3) {{
 		vec3(x, 0.0, 0.0),
 		vec3(0.0, x, 0.0),
 		vec3(0.0, 0.0, x),
 	}};
 }
 
-mat4_t
+mat4
 mat4f1(float x) {
-	return (mat4_t) {{
+	return (mat4) {{
 		vec4(x, 0.0, 0.0, 0.0),
 		vec4(0.0, x, 0.0, 0.0),
 		vec4(0.0, 0.0, x, 0.0),
@@ -158,18 +158,18 @@ mat4f1(float x) {
  * From other matrices
  */
 
-mat3_t
-mat3m2(mat2_t m) {
-	return (mat3_t) {{
+mat3
+mat3m2(mat2 m) {
+	return (mat3) {{
 		vec3(m.cols[0], 0),
 		vec3(m.cols[1], 0),
 		vec3(0.0, 0.0, 1.0),
 	}};
 }
 
-mat4_t
-mat4m2(mat2_t m) {
-	return (mat4_t) {{
+mat4
+mat4m2(mat2 m) {
+	return (mat4) {{
 		vec4(m.cols[0], 0.0, 0.0),
 		vec4(m.cols[1], 0.0, 0.0),
 		vec4(0.0, 0.0, 1.0, 0.0),
@@ -177,9 +177,9 @@ mat4m2(mat2_t m) {
 	}};
 }
 
-mat4_t
-mat4m3(mat3_t m) {
-	return (mat4_t) {{
+mat4
+mat4m3(mat3 m) {
+	return (mat4) {{
 		vec4(m.cols[0], 0),
 		vec4(m.cols[1], 0),
 		vec4(m.cols[2], 0),
@@ -191,38 +191,38 @@ mat4m3(mat3_t m) {
  * Fill matrix directly
  */
 
-mat2_t
+mat2
 mat2f4(
 		float x1, float y1,
 		float x2, float y2
 	) {
-	return (mat2_t) {{
+	return (mat2) {{
 		vec2(x1, y1),
 		vec2(x2, y2),
 	}};
 };
 
-mat3_t
+mat3
 mat3f9(
 		float x1, float y1, float z1,
 		float x2, float y2, float z2,
 		float x3, float y3, float z3
 	) {
-	return (mat3_t) {{
+	return (mat3) {{
 		vec3(x1, y1, z1),
 		vec3(x2, y2, z2),
 		vec3(x3, y3, z3),
 	}};
 };
 
-mat4_t
+mat4
 mat4f16(
 		float x1, float y1, float z1, float w1,
 		float x2, float y2, float z2, float w2,
 		float x3, float y3, float z3, float w3,
 		float x4, float y4, float z4, float w4
 	) {
-	return (mat4_t) {{
+	return (mat4) {{
 		vec4(x1, y1, z1, w1),
 		vec4(x2, y2, z2, w2),
 		vec4(x3, y3, z3, w3),
@@ -235,17 +235,17 @@ mat4f16(
  */
 
 float
-dotv2(vec2_t a, vec2_t b) {
+dotv2(vec2 a, vec2 b) {
 	return (a.x * b.x) + (a.y * b.y);
 }
 
 float
-dotv3(vec3_t a, vec3_t b) {
+dotv3(vec3 a, vec3 b) {
 	return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
 
 float
-dotv4(vec4_t a, vec4_t b) {
+dotv4(vec4 a, vec4 b) {
 	return (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
 }
 
@@ -254,17 +254,17 @@ dotv4(vec4_t a, vec4_t b) {
  */
 
 float
-lengthv2(vec2_t a) {
+lengthv2(vec2 a) {
 	return sqrt(dot(a, a));
 }
 
 float
-lengthv3(vec3_t a) {
+lengthv3(vec3 a) {
 	return sqrt(dot(a, a));
 }
 
 float
-lengthv4(vec4_t a) {
+lengthv4(vec4 a) {
 	return sqrt(dot(a, a));
 }
 
@@ -272,17 +272,17 @@ lengthv4(vec4_t a) {
  * Normalize
  */
 
-vec2_t
-normalizev2(vec2_t a) {
-	return (vec2_t) { a._v / length(a) };
+vec2
+normalizev2(vec2 a) {
+	return (vec2) { a._v / length(a) };
 }
 
-vec3_t
-normalizev3(vec3_t a) {
-	return (vec3_t) { a._v / length(a) };
+vec3
+normalizev3(vec3 a) {
+	return (vec3) { a._v / length(a) };
 }
 
-vec4_t
-normalizev4(vec4_t a) {
-	return (vec4_t) { a._v / length(a) };
+vec4
+normalizev4(vec4 a) {
+	return (vec4) { a._v / length(a) };
 }
