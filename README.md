@@ -16,7 +16,7 @@ vec3 b = vec3(1.0); // = vec3(1.0, 1.0, 1.0);
 vec4 c = vec4(1.0); // = vec4(1.0, 1.0, 1.0, 1.0);
 ```
 
-A higher-dimensional vector can be converted to a lower-dimensional vector.
+A higher-dimensional vector can be converted to a lower-dimensional vector, which discards the higher-dimensional components.
 
 
 ```{.c}
