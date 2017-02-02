@@ -284,3 +284,72 @@ vec4
 normalizev4(vec4 a) {
 	return (vec4) { a._v / length(a) };
 }
+
+
+/*
+ * Matrix transpose
+ */
+
+mat2
+transposem2(mat2 m) {
+	return (mat2) {{
+		vec2(m.cols[0].x, m.cols[1].x),
+		vec2(m.cols[0].y, m.cols[1].y),
+	}};
+}
+
+mat3
+transposem3(mat3 m) {
+	return (mat3) {{
+		vec3(m.cols[0].x, m.cols[1].x, m.cols[2].x),
+		vec3(m.cols[0].y, m.cols[1].y, m.cols[2].y),
+		vec3(m.cols[0].z, m.cols[1].z, m.cols[2].z),
+	}};
+}
+
+mat4
+transposem4(mat4 m) {
+	return (mat4) {{
+		vec4(m.cols[0].x, m.cols[1].x, m.cols[2].x, m.cols[3].x),
+		vec4(m.cols[0].y, m.cols[1].y, m.cols[2].y, m.cols[3].y),
+		vec4(m.cols[0].z, m.cols[1].z, m.cols[2].z, m.cols[3].z),
+		vec4(m.cols[0].w, m.cols[1].w, m.cols[2].w, m.cols[3].w),
+	}};
+}
+
+/*
+ * Matrix multiplication
+ */
+
+mat2
+multm2(mat2 m, mat2 n) {
+	mat2 mt = transpose(m);
+
+	return (mat2) {{
+		vec2(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0])),
+		vec2(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1])),
+	}};
+}
+
+mat3
+multm3(mat3 m, mat3 n) {
+	mat3 mt = transpose(m);
+
+	return (mat3) {{
+		vec3(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0])),
+		vec3(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]), dot(mt.cols[2], n.cols[1])),
+		vec3(dot(mt.cols[0], n.cols[2]), dot(mt.cols[1], n.cols[2]), dot(mt.cols[2], n.cols[2])),
+	}};
+}
+
+mat4
+multm4(mat4 m, mat4 n) {
+	mat4 mt = transpose(m);
+
+	return (mat4) {{
+		vec4(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0]), dot(mt.cols[3], n.cols[0])),
+		vec4(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]), dot(mt.cols[2], n.cols[1]), dot(mt.cols[3], n.cols[1])),
+		vec4(dot(mt.cols[0], n.cols[2]), dot(mt.cols[1], n.cols[2]), dot(mt.cols[2], n.cols[2]), dot(mt.cols[3], n.cols[2])),
+		vec4(dot(mt.cols[0], n.cols[3]), dot(mt.cols[1], n.cols[3]), dot(mt.cols[2], n.cols[3]), dot(mt.cols[3], n.cols[3])),
+	}};
+}

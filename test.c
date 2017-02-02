@@ -265,6 +265,88 @@ test_matrix_constructors(void) {
 }
 
 void
+test_matrix_mult(void) {
+	const float _a = 2.0;
+	const float _b = 3.0;
+	const float _c = 5.0;
+	const float _d = 7.0;
+	const float _e = 11.0;
+	const float _f = 13.0;
+	const float _g = 17.0;
+	const float _h = 19.0;
+	const float _i = 23.0;
+	const float _j = 29.0;
+	const float _k = 31.0;
+	const float _l = 37.0;
+	const float _m = 41.0;
+	const float _n = 43.0;
+	const float _o = 47.0;
+	const float _p = 53.0;
+	const float _q = 59.0;
+	const float _r = 61.0;
+
+	{
+		mat2 m = mat2(
+			_a, _b,
+			_c, _d
+		);
+		mat2 n = mat2(
+			_e, _f,
+			_g, _h
+		);
+
+		mat2 mt = transpose(m);
+		mat2 r = mult(m, n);
+
+		assert(equals(r.cols[0], vec2(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]))));
+		assert(equals(r.cols[1], vec2(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]))));
+	}
+
+	{
+		mat3 m = mat3(
+			_a, _b, _c,
+			_d, _e, _f,
+			_g, _h, _i
+		);
+		mat3 n = mat3(
+			_j, _k, _l,
+			_m, _n, _o,
+			_p, _q, _r
+		);
+
+		mat3 mt = transpose(m);
+		mat3 r = mult(m, n);
+
+		assert(equals(r.cols[0], vec3(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0]))));
+		assert(equals(r.cols[1], vec3(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]), dot(mt.cols[2], n.cols[1]))));
+		assert(equals(r.cols[2], vec3(dot(mt.cols[0], n.cols[2]), dot(mt.cols[1], n.cols[2]), dot(mt.cols[2], n.cols[2]))));
+	}
+
+	{
+		mat4 m = mat4(
+			_a, _b, _c, _d,
+			_e, _f, _g, _h,
+			_i, _j, _k, _l,
+			_m, _n, _o, _p
+		);
+		mat4 n = mat4(
+			_c, _d, _b, _a,
+			_o, _p, _n, _m,
+			_k, _l, _j, _i,
+			_g, _h, _f, _e
+		);
+
+		mat4 mt = transpose(m);
+		mat4 r = mult(m, n);
+
+		assert(equals(r.cols[0], vec4(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0]), dot(mt.cols[3], n.cols[0]))));
+		assert(equals(r.cols[1], vec4(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]), dot(mt.cols[2], n.cols[1]), dot(mt.cols[3], n.cols[1]))));
+		assert(equals(r.cols[2], vec4(dot(mt.cols[0], n.cols[2]), dot(mt.cols[1], n.cols[2]), dot(mt.cols[2], n.cols[2]), dot(mt.cols[3], n.cols[2]))));
+		assert(equals(r.cols[3], vec4(dot(mt.cols[0], n.cols[3]), dot(mt.cols[1], n.cols[3]), dot(mt.cols[2], n.cols[3]), dot(mt.cols[3], n.cols[3]))));
+	}
+}
+
+void
 test_dot_product(void) {
 	const float a = 2.0;
 	const float b = 3.0;
@@ -313,6 +395,7 @@ int
 main(int argc, char **argv) {
 	test_vector_constructors();
 	test_matrix_constructors();
+	test_matrix_mult();
 	test_dot_product();
 }
 

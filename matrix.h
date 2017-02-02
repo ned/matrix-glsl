@@ -247,10 +247,18 @@ mat4 mat4f16(float, float, float, float, float, float, float, float, float, floa
 #define mat4(...) OVERLOAD_ARGS_16(__VA_ARGS__, MAT4_NARGS_16, MAT4_NARGS_15, MAT4_NARGS_14, MAT4_NARGS_13, MAT4_NARGS_12, MAT4_NARGS_11, MAT4_NARGS_10, MAT4_NARGS_9, MAT4_NARGS_8, MAT4_NARGS_7, MAT4_NARGS_6, MAT4_NARGS_5, MAT4_NARGS_4, MAT4_NARGS_3, MAT4_NARGS_2, MAT4_NARGS_1)(__VA_ARGS__)
 
 
-/*
 #define GENERIC_MAT(FN, A) _Generic((A) \
     , mat2: FN ## m2                    \
     , mat3: FN ## m3                    \
     , mat4: FN ## m4                    \
     )
-*/
+
+mat2 transposem2(mat2);
+mat3 transposem3(mat3);
+mat4 transposem4(mat4);
+#define transpose(M) GENERIC_MAT(transpose, M)(M)
+
+mat2 multm2(mat2, mat2);
+mat3 multm3(mat3, mat3);
+mat4 multm4(mat4, mat4);
+#define mult(M, N) GENERIC_MAT(mult, M)(M, N)
