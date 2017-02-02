@@ -122,6 +122,34 @@ equalsv4(vec4 a, vec4 b) {
 }
 
 /*
+ * Matrix equality.
+ */
+
+bool
+equalsm2(mat2 a, mat2 b) {
+	return
+		equals(a.cols[0], b.cols[0]) &&
+		equals(a.cols[1], b.cols[1]);
+}
+
+bool
+equalsm3(mat3 a, mat3 b) {
+	return
+		equals(a.cols[0], b.cols[0]) &&
+		equals(a.cols[1], b.cols[1]) &&
+		equals(a.cols[2], b.cols[2]);
+}
+
+bool
+equalsm4(mat4 a, mat4 b) {
+	return
+		equals(a.cols[0], b.cols[0]) &&
+		equals(a.cols[1], b.cols[1]) &&
+		equals(a.cols[2], b.cols[2]) &&
+		equals(a.cols[3], b.cols[3]);
+}
+
+/*
  * Single argument matrix constructors
  */
 

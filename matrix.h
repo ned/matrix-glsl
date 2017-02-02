@@ -178,10 +178,22 @@ vec4 vec4f2v2(float, float, vec2);
     , vec4: FN ## v4                    \
     )
 
+#define GENERIC_VEC_MAT(FN, A) _Generic((A) \
+    , vec2: FN ## v2                    \
+    , vec3: FN ## v3                    \
+    , vec4: FN ## v4                    \
+    , mat2: FN ## m2                    \
+    , mat3: FN ## m3                    \
+    , mat4: FN ## m4                    \
+    )
+
 bool equalsv2(vec2, vec2);
 bool equalsv3(vec3, vec3);
 bool equalsv4(vec4, vec4);
-#define equals(A, B) GENERIC_VEC(equals, A)(A, B)
+bool equalsm2(mat2, mat2);
+bool equalsm3(mat3, mat3);
+bool equalsm4(mat4, mat4);
+#define equals(A, B) GENERIC_VEC_MAT(equals, A)(A, B)
 
 float dotv2(vec2, vec2);
 float dotv3(vec3, vec3);
