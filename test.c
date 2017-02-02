@@ -175,6 +175,43 @@ test_matrix_constructors(void) {
 	}
 
 	/*
+	 * From vectors
+	 */
+
+	{
+		vec2 v1 = vec2(_a, _b);
+		vec2 v2 = vec2(_c, _d);
+		mat2 m = mat2(v1, v2);
+
+		assert(equals(m.cols[0], v1));
+		assert(equals(m.cols[1], v2));
+	}
+
+	{
+		vec3 v1 = vec3(_a, _b, _c);
+		vec3 v2 = vec3(_d, _e, _f);
+		vec3 v3 = vec3(_g, _h, _i);
+		mat3 m = mat3(v1, v2, v3);
+
+		assert(equals(m.cols[0], v1));
+		assert(equals(m.cols[1], v2));
+		assert(equals(m.cols[2], v3));
+	}
+
+	{
+		vec4 v1 = vec4(_a, _b, _c, _d);
+		vec4 v2 = vec4(_e, _f, _g, _h);
+		vec4 v3 = vec4(_i, _j, _k, _l);
+		vec4 v4 = vec4(_m, _n, _o, _p);
+		mat4 m = mat4(v1, v2, v3, v4);
+
+		assert(equals(m.cols[0], v1));
+		assert(equals(m.cols[1], v2));
+		assert(equals(m.cols[2], v3));
+		assert(equals(m.cols[3], v4));
+	}
+
+	/*
 	 * From other matrices
 	 *
 	 * Note: When a larger matrix is constructed from a smaller matrix, the cells should

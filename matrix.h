@@ -220,6 +220,11 @@ mat3 mat3m2(mat2);
 mat4 mat4m2(mat2);
 mat4 mat4m3(mat3);
 
+/* Fills columns from vectors */
+mat2 mat2v2(vec2, vec2);
+mat3 mat3v3(vec3, vec3, vec3);
+mat4 mat4v4(vec4, vec4, vec4, vec4);
+
 /* Fills matrix directly - column major */
 mat2 mat2f4(float, float, float, float);
 mat3 mat3f9(float, float, float, float, float, float, float, float, float);
@@ -228,6 +233,10 @@ mat4 mat4f16(float, float, float, float, float, float, float, float, float, floa
 #define MAT2_NARGS_1(A) _Generic((A) \
     , default:   mat2f1              \
     )(A)
+
+#define MAT2_NARGS_2(A, B) _Generic((A) \
+    , vec2: mat2v2                      \
+    )(A, B)
 
 #define MAT2_NARGS_4(A, ...) _Generic((A) \
     , default:   mat2f4                   \
@@ -239,6 +248,10 @@ mat4 mat4f16(float, float, float, float, float, float, float, float, float, floa
     , mat2:  mat3m2                  \
     )(A)
 
+#define MAT3_NARGS_3(A, B, C) _Generic((A) \
+    , vec3:  mat3v3                        \
+    )(A, B, C)
+
 #define MAT3_NARGS_9(A, ...) _Generic((A) \
     , default:   mat3f9                   \
     )(A, __VA_ARGS__)
@@ -249,6 +262,10 @@ mat4 mat4f16(float, float, float, float, float, float, float, float, float, floa
     , mat2:  mat4m2                  \
     , mat3:  mat4m3                  \
     )(A)
+
+#define MAT4_NARGS_4(A, B, C, D) _Generic((A) \
+    , vec4: mat4v4                            \
+    )(A, B, C, D)
 
 #define MAT4_NARGS_16(A, ...) _Generic((A) \
     , default:   mat4f16                   \

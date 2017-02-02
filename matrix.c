@@ -181,6 +181,25 @@ mat4f1(float x) {
 }
 
 /*
+ * From vectors
+ */
+
+mat2
+mat2v2(vec2 a, vec2 b) {
+	return (mat2) {{ a, b }};
+}
+
+mat3
+mat3v3(vec3 a, vec3 b, vec3 c) {
+	return (mat3) {{ a, b, c }};
+}
+
+mat4
+mat4v4(vec4 a, vec4 b, vec4 c, vec4 d) {
+	return (mat4) {{ a, b, c, d }};
+}
+
+/*
  * From other matrices
  */
 
