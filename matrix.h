@@ -214,32 +214,32 @@ mat3 mat3f9(float, float, float, float, float, float, float, float, float);
 mat4 mat4f16(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
 
 #define MAT2_NARGS_1(A) _Generic((A) \
-    , float:   mat2f1                \
+    , default:   mat2f1              \
     )(A)
 
 #define MAT2_NARGS_4(A, ...) _Generic((A) \
-    , float:   mat2f4                     \
+    , default:   mat2f4                   \
     )(A, __VA_ARGS__)
 
 
 #define MAT3_NARGS_1(A) _Generic((A) \
-    , float:   mat3f1                \
+    , default:   mat3f1              \
     , mat2:  mat3m2                  \
     )(A)
 
 #define MAT3_NARGS_9(A, ...) _Generic((A) \
-    , float:   mat3f9                     \
+    , default:   mat3f9                   \
     )(A, __VA_ARGS__)
 
 
 #define MAT4_NARGS_1(A) _Generic((A) \
-    , float:   mat4f1                \
+    , default:   mat4f1              \
     , mat2:  mat4m2                  \
     , mat3:  mat4m3                  \
     )(A)
 
 #define MAT4_NARGS_16(A, ...) _Generic((A) \
-    , float:   mat4f16                     \
+    , default:   mat4f16                   \
     )(A, __VA_ARGS__)
 
 #define mat2(...) OVERLOAD_ARGS_4(__VA_ARGS__, MAT2_NARGS_4, MAT2_NARGS_3, MAT2_NARGS_2, MAT2_NARGS_1)(__VA_ARGS__)
