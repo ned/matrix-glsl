@@ -374,8 +374,12 @@ test_matrix_mult(void) {
 		mat2 mt = transpose(m);
 		mat2 r = mult(m, n);
 
-		assert(equals(r.cols[0], vec2(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]))));
-		assert(equals(r.cols[1], vec2(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]))));
+		mat2 expected = mat2(
+			vec2(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0])),
+			vec2(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]))
+		);
+
+		assert(equals(expected, r));
 	}
 
 	{
@@ -393,9 +397,13 @@ test_matrix_mult(void) {
 		mat3 mt = transpose(m);
 		mat3 r = mult(m, n);
 
-		assert(equals(r.cols[0], vec3(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0]))));
-		assert(equals(r.cols[1], vec3(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]), dot(mt.cols[2], n.cols[1]))));
-		assert(equals(r.cols[2], vec3(dot(mt.cols[0], n.cols[2]), dot(mt.cols[1], n.cols[2]), dot(mt.cols[2], n.cols[2]))));
+		mat3 expected = mat3(
+			vec3(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0])),
+			vec3(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]), dot(mt.cols[2], n.cols[1])),
+			vec3(dot(mt.cols[0], n.cols[2]), dot(mt.cols[1], n.cols[2]), dot(mt.cols[2], n.cols[2]))
+		);
+
+		assert(equals(expected, r));
 	}
 
 	{
@@ -415,10 +423,14 @@ test_matrix_mult(void) {
 		mat4 mt = transpose(m);
 		mat4 r = mult(m, n);
 
-		assert(equals(r.cols[0], vec4(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0]), dot(mt.cols[3], n.cols[0]))));
-		assert(equals(r.cols[1], vec4(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]), dot(mt.cols[2], n.cols[1]), dot(mt.cols[3], n.cols[1]))));
-		assert(equals(r.cols[2], vec4(dot(mt.cols[0], n.cols[2]), dot(mt.cols[1], n.cols[2]), dot(mt.cols[2], n.cols[2]), dot(mt.cols[3], n.cols[2]))));
-		assert(equals(r.cols[3], vec4(dot(mt.cols[0], n.cols[3]), dot(mt.cols[1], n.cols[3]), dot(mt.cols[2], n.cols[3]), dot(mt.cols[3], n.cols[3]))));
+		mat4 expected = mat4(
+			vec4(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0]), dot(mt.cols[3], n.cols[0])),
+			vec4(dot(mt.cols[0], n.cols[1]), dot(mt.cols[1], n.cols[1]), dot(mt.cols[2], n.cols[1]), dot(mt.cols[3], n.cols[1])),
+			vec4(dot(mt.cols[0], n.cols[2]), dot(mt.cols[1], n.cols[2]), dot(mt.cols[2], n.cols[2]), dot(mt.cols[3], n.cols[2])),
+			vec4(dot(mt.cols[0], n.cols[3]), dot(mt.cols[1], n.cols[3]), dot(mt.cols[2], n.cols[3]), dot(mt.cols[3], n.cols[3]))
+		);
+
+		assert(equals(expected, r));
 	}
 }
 
