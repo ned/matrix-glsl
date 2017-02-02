@@ -108,8 +108,6 @@ vec4f2v2(float x, float y, vec2 v) {
 
 bool
 equalsv2(vec2 a, vec2 b) {
-#include <assert.h>
-	assert(false);
 	return a.x == b.x && a.y == b.y;
 }
 

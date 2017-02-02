@@ -181,7 +181,7 @@ vec4 vec4f2v2(float, float, vec2);
 bool equalsv2(vec2, vec2);
 bool equalsv3(vec3, vec3);
 bool equalsv4(vec4, vec4);
-#define equals(A, B) GENERIC_VEC(dot, A)(A, B)
+#define equals(A, B) GENERIC_VEC(equals, A)(A, B)
 
 float dotv2(vec2, vec2);
 float dotv3(vec3, vec3);
