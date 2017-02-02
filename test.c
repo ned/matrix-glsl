@@ -153,25 +153,37 @@ test_matrix_constructors(void) {
 	{
 		mat2 m = mat2(_a);
 
-		assert(equals(m.cols[0], vec2(_a, 0.0)));
-		assert(equals(m.cols[1], vec2(0.0, _a)));
+		mat2 expected = mat2(
+			vec2(_a, 0.0),
+			vec2(0.0, _a)
+		);
+
+		assert(equals(expected, m));
 	}
 
 	{
 		mat3 m = mat3(_a);
 
-		assert(equals(m.cols[0], vec3(_a, 0.0, 0.0)));
-		assert(equals(m.cols[1], vec3(0.0, _a, 0.0)));
-		assert(equals(m.cols[2], vec3(0.0, 0.0, _a)));
+		mat3 expected = mat3(
+			vec3(_a, 0.0, 0.0),
+			vec3(0.0, _a, 0.0),
+			vec3(0.0, 0.0, _a)
+		);
+
+		assert(equals(expected, m));
 	}
 
 	{
 		mat4 m = mat4(_a);
 
-		assert(equals(m.cols[0], vec4(_a, 0.0, 0.0, 0.0)));
-		assert(equals(m.cols[1], vec4(0.0, _a, 0.0, 0.0)));
-		assert(equals(m.cols[2], vec4(0.0, 0.0, _a, 0.0)));
-		assert(equals(m.cols[3], vec4(0.0, 0.0, 0.0, _a)));
+		mat4 expected = mat4(
+			vec4(_a, 0.0, 0.0, 0.0),
+			vec4(0.0, _a, 0.0, 0.0),
+			vec4(0.0, 0.0, _a, 0.0),
+			vec4(0.0, 0.0, 0.0, _a)
+		);
+
+		assert(equals(expected, m));
 	}
 
 	/*
@@ -183,8 +195,12 @@ test_matrix_constructors(void) {
 		vec2 v2 = vec2(_c, _d);
 		mat2 m = mat2(v1, v2);
 
-		assert(equals(m.cols[0], v1));
-		assert(equals(m.cols[1], v2));
+		mat2 expected = mat2(
+			_a, _b,
+			_c, _d
+		);
+
+		assert(equals(expected, m));
 	}
 
 	{
@@ -193,9 +209,13 @@ test_matrix_constructors(void) {
 		vec3 v3 = vec3(_g, _h, _i);
 		mat3 m = mat3(v1, v2, v3);
 
-		assert(equals(m.cols[0], v1));
-		assert(equals(m.cols[1], v2));
-		assert(equals(m.cols[2], v3));
+		mat3 expected = mat3(
+			_a, _b, _c,
+			_d, _e, _f,
+			_g, _h, _i
+		);
+
+		assert(equals(expected, m));
 	}
 
 	{
@@ -205,10 +225,14 @@ test_matrix_constructors(void) {
 		vec4 v4 = vec4(_m, _n, _o, _p);
 		mat4 m = mat4(v1, v2, v3, v4);
 
-		assert(equals(m.cols[0], v1));
-		assert(equals(m.cols[1], v2));
-		assert(equals(m.cols[2], v3));
-		assert(equals(m.cols[3], v4));
+		mat4 expected = mat4(
+			_a, _b, _c, _d,
+			_e, _f, _g, _h,
+			_i, _j, _k, _l,
+			_m, _n, _o, _p
+		);
+
+		assert(equals(expected, m));
 	}
 
 	/*
@@ -220,44 +244,59 @@ test_matrix_constructors(void) {
 
 	// mat3 from mat2
 	{
-		mat2 n;
-		n.cols[0] = vec2(_a, _b);
-		n.cols[1] = vec2(_c, _d);
+		mat2 n = mat2(
+			_a, _b,
+			_c, _d
+		);
 
 		mat3 m = mat3(n);
 
-		assert(equals(m.cols[0], vec3(_a, _b, 0)));
-		assert(equals(m.cols[1], vec3(_c, _d, 0)));
-		assert(equals(m.cols[2], vec3(0, 0, 1.0)));
+		mat3 expected = mat3(
+			_a, _b, 0,
+			_c, _d, 0,
+			0, 0, 1.0
+		);
+
+		assert(equals(expected, m));
 	}
 
 	// mat4 from mat2
 	{
-		mat2 n;
-		n.cols[0] = vec2(_a, _b);
-		n.cols[1] = vec2(_c, _d);
+		mat2 n = mat2(
+			_a, _b,
+			_c, _d
+		);
 
 		mat4 m = mat4(n);
 
-		assert(equals(m.cols[0], vec4(_a, _b, 0, 0)));
-		assert(equals(m.cols[1], vec4(_c, _d, 0, 0)));
-		assert(equals(m.cols[2], vec4(0, 0, 1.0, 0)));
-		assert(equals(m.cols[3], vec4(0, 0, 0, 1.0)));
+		mat4 expected = mat4(
+			_a, _b, 0, 0,
+			_c, _d, 0, 0,
+			0, 0, 1.0, 0,
+			0, 0, 0, 1.0
+		);
+
+		assert(equals(expected, m));
 	}
 
 	// mat4 from mat3
 	{
-		mat3 n;
-		n.cols[0] = vec3(_a, _b, _c);
-		n.cols[1] = vec3(_d, _e, _f);
-		n.cols[2] = vec3(_g, _h, _i);
+		mat3 n = mat3(
+			_a, _b, _c,
+			_d, _e, _f,
+			_g, _h, _i
+		);
 
 		mat4 m = mat4(n);
 
-		assert(equals(m.cols[0], vec4(_a, _b, _c, 0)));
-		assert(equals(m.cols[1], vec4(_d, _e, _f, 0)));
-		assert(equals(m.cols[2], vec4(_g, _h, _i, 0)));
-		assert(equals(m.cols[3], vec4(0, 0, 0, 1.0)));
+		mat4 expected = mat4(
+			_a, _b, _c, 0,
+			_d, _e, _f, 0,
+			_g, _h, _i, 0,
+			0, 0, 0, 1.0
+		);
+
+		assert(equals(expected, m));
 	}
 
 	/*
