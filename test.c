@@ -432,6 +432,43 @@ test_matrix_mult(void) {
 
 		assert(equals(expected, r));
 	}
+
+	/*
+	 * Test identity works
+	 */
+
+	{
+		mat2 m = mat2(
+			_a, _b,
+			_c, _d
+		);
+
+		assert(equals(mult(m, mat2(1.0)), m));
+		assert(equals(mult(mat2(1.0), m), m));
+	}
+
+	{
+		mat3 m = mat3(
+			_a, _b, _c,
+			_d, _e, _f,
+			_g, _h, _i
+		);
+
+		assert(equals(mult(m, mat3(1.0)), m));
+		assert(equals(mult(mat3(1.0), m), m));
+	}
+
+	{
+		mat4 m = mat4(
+			_a, _b, _c, _d,
+			_e, _f, _g, _h,
+			_i, _j, _k, _l,
+			_m, _n, _o, _p
+		);
+
+		assert(equals(mult(m, mat4(1.0)), m));
+		assert(equals(mult(mat4(1.0), m), m));
+	}
 }
 
 void
