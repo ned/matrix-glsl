@@ -3,6 +3,67 @@
 
 #include "matrix.h"
 
+#define GENERIC_VEC_MAT(FN, A) _Generic((A) \
+    , vec2: FN ## v2                    \
+    , vec3: FN ## v3                    \
+    , vec4: FN ## v4                    \
+    , mat2: FN ## m2                    \
+    , mat3: FN ## m3                    \
+    , mat4: FN ## m4                    \
+    )
+
+bool equalsv2(vec2, vec2);
+bool equalsv3(vec3, vec3);
+bool equalsv4(vec4, vec4);
+bool equalsm2(mat2, mat2);
+bool equalsm3(mat3, mat3);
+bool equalsm4(mat4, mat4);
+#define equals(A, B) GENERIC_VEC_MAT(equals, A)(A, B)
+
+
+/*
+ * Equality functions
+ */
+
+bool
+equalsv2(vec2 a, vec2 b) {
+	return a.x == b.x && a.y == b.y;
+}
+
+bool
+equalsv3(vec3 a, vec3 b) {
+	return a.x == b.x && a.y == b.y && a.z == b.z;
+}
+
+bool
+equalsv4(vec4 a, vec4 b) {
+	return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+}
+
+bool
+equalsm2(mat2 a, mat2 b) {
+	return
+		equals(a.cols[0], b.cols[0]) &&
+		equals(a.cols[1], b.cols[1]);
+}
+
+bool
+equalsm3(mat3 a, mat3 b) {
+	return
+		equals(a.cols[0], b.cols[0]) &&
+		equals(a.cols[1], b.cols[1]) &&
+		equals(a.cols[2], b.cols[2]);
+}
+
+bool
+equalsm4(mat4 a, mat4 b) {
+	return
+		equals(a.cols[0], b.cols[0]) &&
+		equals(a.cols[1], b.cols[1]) &&
+		equals(a.cols[2], b.cols[2]) &&
+		equals(a.cols[3], b.cols[3]);
+}
+
 void
 test_vector_constructors(void) {
 	const float a = 1.0;
@@ -126,6 +187,11 @@ test_vector_constructors(void) {
 		assert(v.x == a && v.y == b && v.z == c && v.w == d);
 	}
 }
+
+
+/*
+ * Tests
+ */
 
 void
 test_matrix_constructors(void) {

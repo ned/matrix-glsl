@@ -99,56 +99,6 @@ vec4f2v2(float x, float y, vec2 v) {
 	return (vec4) {{ x, y, v.x, v.y }};
 }
 
-
-/*
- * Vector equality
- *
- * Note: in glm, equality is component-wise, but I needed a way to easily test equality in tests.
- */
-
-bool
-equalsv2(vec2 a, vec2 b) {
-	return a.x == b.x && a.y == b.y;
-}
-
-bool
-equalsv3(vec3 a, vec3 b) {
-	return a.x == b.x && a.y == b.y && a.z == b.z;
-}
-
-bool
-equalsv4(vec4 a, vec4 b) {
-	return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
-}
-
-/*
- * Matrix equality.
- */
-
-bool
-equalsm2(mat2 a, mat2 b) {
-	return
-		equals(a.cols[0], b.cols[0]) &&
-		equals(a.cols[1], b.cols[1]);
-}
-
-bool
-equalsm3(mat3 a, mat3 b) {
-	return
-		equals(a.cols[0], b.cols[0]) &&
-		equals(a.cols[1], b.cols[1]) &&
-		equals(a.cols[2], b.cols[2]);
-}
-
-bool
-equalsm4(mat4 a, mat4 b) {
-	return
-		equals(a.cols[0], b.cols[0]) &&
-		equals(a.cols[1], b.cols[1]) &&
-		equals(a.cols[2], b.cols[2]) &&
-		equals(a.cols[3], b.cols[3]);
-}
-
 /*
  * Single argument matrix constructors
  */
