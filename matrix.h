@@ -134,14 +134,14 @@ pure vec4 vec4f2v2(float, float, vec2);
  */
 
 #define VEC2_NARGS_1(A) _Generic((A)    \
-    , default: vec2f1                   \
+    , float: vec2f1                     \
     , vec3:  vec2v3                     \
     , vec4:  vec2v4                     \
     )(A)
 #define VEC2_NARGS_2(A, B) vec2f2(A, B)
 
 #define VEC3_NARGS_1(A) _Generic((A)    \
-    , default: vec3f1                   \
+    , float: vec3f1                     \
     , vec4:  vec3v4                     \
     )(A)
 #define VEC3_NARGS_2(A, B) _Generic((A) \
@@ -215,7 +215,7 @@ pure mat3 mat3f9(float, float, float, float, float, float, float, float, float);
 pure mat4 mat4f16(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
 
 #define MAT2_NARGS_1(A) _Generic((A) \
-    , default:   mat2f1              \
+    , float:   mat2f1                \
     )(A)
 
 #define MAT2_NARGS_2(A, B) _Generic((A) \
@@ -223,12 +223,12 @@ pure mat4 mat4f16(float, float, float, float, float, float, float, float, float,
     )(A, B)
 
 #define MAT2_NARGS_4(A, ...) _Generic((A) \
-    , default:   mat2f4                   \
+    , float:   mat2f4                     \
     )(A, __VA_ARGS__)
 
 
 #define MAT3_NARGS_1(A) _Generic((A) \
-    , default:   mat3f1              \
+    , float:   mat3f1                \
     , mat2:  mat3m2                  \
     )(A)
 
@@ -237,12 +237,12 @@ pure mat4 mat4f16(float, float, float, float, float, float, float, float, float,
     )(A, B, C)
 
 #define MAT3_NARGS_9(A, ...) _Generic((A) \
-    , default:   mat3f9                   \
+    , float:   mat3f9                     \
     )(A, __VA_ARGS__)
 
 
 #define MAT4_NARGS_1(A) _Generic((A) \
-    , default:   mat4f1              \
+    , float:   mat4f1                \
     , mat2:  mat4m2                  \
     , mat3:  mat4m3                  \
     )(A)
@@ -252,7 +252,7 @@ pure mat4 mat4f16(float, float, float, float, float, float, float, float, float,
     )(A, B, C, D)
 
 #define MAT4_NARGS_16(A, ...) _Generic((A) \
-    , default:   mat4f16                   \
+    , float:   mat4f16                     \
     )(A, __VA_ARGS__)
 
 #define mat2(...) OVERLOAD_ARGS_4(__VA_ARGS__, MAT2_NARGS_4, MAT2_NARGS_3, MAT2_NARGS_2, MAT2_NARGS_1)(__VA_ARGS__)

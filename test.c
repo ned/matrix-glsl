@@ -66,10 +66,10 @@ equalsm4(mat4 a, mat4 b) {
 
 void
 test_vector_constructors(void) {
-	const float a = 1.0;
-	const float b = 2.0;
-	const float c = 3.0;
-	const float d = 4.0;
+	const float a = 1.0f;
+	const float b = 2.0f;
+	const float c = 3.0f;
+	const float d = 4.0f;
 
 	/*
 	 * Single value
@@ -195,22 +195,22 @@ test_vector_constructors(void) {
 
 void
 test_matrix_constructors(void) {
-	const float _a = 2.0;
-	const float _b = 3.0;
-	const float _c = 5.0;
-	const float _d = 7.0;
-	const float _e = 11.0;
-	const float _f = 13.0;
-	const float _g = 17.0;
-	const float _h = 19.0;
-	const float _i = 23.0;
-	const float _j = 29.0;
-	const float _k = 31.0;
-	const float _l = 37.0;
-	const float _m = 41.0;
-	const float _n = 43.0;
-	const float _o = 47.0;
-	const float _p = 53.0;
+	const float _a = 2.0f;
+	const float _b = 3.0f;
+	const float _c = 5.0f;
+	const float _d = 7.0f;
+	const float _e = 11.0f;
+	const float _f = 13.0f;
+	const float _g = 17.0f;
+	const float _h = 19.0f;
+	const float _i = 23.0f;
+	const float _j = 29.0f;
+	const float _k = 31.0f;
+	const float _l = 37.0f;
+	const float _m = 41.0f;
+	const float _n = 43.0f;
+	const float _o = 47.0f;
+	const float _p = 53.0f;
 
 	/*
 	 * Single value: diagonal constructor
@@ -220,8 +220,8 @@ test_matrix_constructors(void) {
 		mat2 m = mat2(_a);
 
 		mat2 expected = mat2(
-			vec2(_a, 0.0),
-			vec2(0.0, _a)
+			vec2(_a, 0.0f),
+			vec2(0.0f, _a)
 		);
 
 		assert(equals(expected, m));
@@ -231,9 +231,9 @@ test_matrix_constructors(void) {
 		mat3 m = mat3(_a);
 
 		mat3 expected = mat3(
-			vec3(_a, 0.0, 0.0),
-			vec3(0.0, _a, 0.0),
-			vec3(0.0, 0.0, _a)
+			vec3(_a, 0.0f, 0.0f),
+			vec3(0.0f, _a, 0.0f),
+			vec3(0.0f, 0.0f, _a)
 		);
 
 		assert(equals(expected, m));
@@ -243,10 +243,10 @@ test_matrix_constructors(void) {
 		mat4 m = mat4(_a);
 
 		mat4 expected = mat4(
-			vec4(_a, 0.0, 0.0, 0.0),
-			vec4(0.0, _a, 0.0, 0.0),
-			vec4(0.0, 0.0, _a, 0.0),
-			vec4(0.0, 0.0, 0.0, _a)
+			vec4(_a, 0.0f, 0.0f, 0.0f),
+			vec4(0.0f, _a, 0.0f, 0.0f),
+			vec4(0.0f, 0.0f, _a, 0.0f),
+			vec4(0.0f, 0.0f, 0.0f, _a)
 		);
 
 		assert(equals(expected, m));
@@ -320,7 +320,7 @@ test_matrix_constructors(void) {
 		mat3 expected = mat3(
 			_a, _b, 0,
 			_c, _d, 0,
-			0, 0, 1.0
+			0, 0, 1.0f
 		);
 
 		assert(equals(expected, m));
@@ -336,10 +336,10 @@ test_matrix_constructors(void) {
 		mat4 m = mat4(n);
 
 		mat4 expected = mat4(
-			_a, _b, 0, 0,
-			_c, _d, 0, 0,
-			0, 0, 1.0, 0,
-			0, 0, 0, 1.0
+			_a, _b, 0.0f, 0.0f,
+			_c, _d, 0.0f, 0.0f,
+			0.0f, 0.0f, 1.0f, 0.0f,
+			0.0f, 0.0f, 0.0f, 1.0f
 		);
 
 		assert(equals(expected, m));
@@ -356,10 +356,10 @@ test_matrix_constructors(void) {
 		mat4 m = mat4(n);
 
 		mat4 expected = mat4(
-			_a, _b, _c, 0,
-			_d, _e, _f, 0,
-			_g, _h, _i, 0,
-			0, 0, 0, 1.0
+			_a, _b, _c, 0.0f,
+			_d, _e, _f, 0.0f,
+			_g, _h, _i, 0.0f,
+			0.0f, 0.0f, 0.0f, 1.0f
 		);
 
 		assert(equals(expected, m));
@@ -408,24 +408,24 @@ test_matrix_constructors(void) {
 
 void
 test_matrix_mult(void) {
-	const float _a = 2.0;
-	const float _b = 3.0;
-	const float _c = 5.0;
-	const float _d = 7.0;
-	const float _e = 11.0;
-	const float _f = 13.0;
-	const float _g = 17.0;
-	const float _h = 19.0;
-	const float _i = 23.0;
-	const float _j = 29.0;
-	const float _k = 31.0;
-	const float _l = 37.0;
-	const float _m = 41.0;
-	const float _n = 43.0;
-	const float _o = 47.0;
-	const float _p = 53.0;
-	const float _q = 59.0;
-	const float _r = 61.0;
+	const float _a = 2.0f;
+	const float _b = 3.0f;
+	const float _c = 5.0f;
+	const float _d = 7.0f;
+	const float _e = 11.0f;
+	const float _f = 13.0f;
+	const float _g = 17.0f;
+	const float _h = 19.0f;
+	const float _i = 23.0f;
+	const float _j = 29.0f;
+	const float _k = 31.0f;
+	const float _l = 37.0f;
+	const float _m = 41.0f;
+	const float _n = 43.0f;
+	const float _o = 47.0f;
+	const float _p = 53.0f;
+	const float _q = 59.0f;
+	const float _r = 61.0f;
 
 	{
 		mat2 m = mat2(
@@ -509,8 +509,8 @@ test_matrix_mult(void) {
 			_c, _d
 		);
 
-		assert(equals(mult(m, mat2(1.0)), m));
-		assert(equals(mult(mat2(1.0), m), m));
+		assert(equals(mult(m, mat2(1.0f)), m));
+		assert(equals(mult(mat2(1.0f), m), m));
 	}
 
 	{
@@ -520,8 +520,8 @@ test_matrix_mult(void) {
 			_g, _h, _i
 		);
 
-		assert(equals(mult(m, mat3(1.0)), m));
-		assert(equals(mult(mat3(1.0), m), m));
+		assert(equals(mult(m, mat3(1.0f)), m));
+		assert(equals(mult(mat3(1.0f), m), m));
 	}
 
 	{
@@ -532,21 +532,21 @@ test_matrix_mult(void) {
 			_m, _n, _o, _p
 		);
 
-		assert(equals(mult(m, mat4(1.0)), m));
-		assert(equals(mult(mat4(1.0), m), m));
+		assert(equals(mult(m, mat4(1.0f)), m));
+		assert(equals(mult(mat4(1.0f), m), m));
 	}
 }
 
 void
 test_dot_product(void) {
-	const float a = 2.0;
-	const float b = 3.0;
-	const float c = 5.0;
-	const float d = 7.0;
-	const float e = 11.0;
-	const float f = 13.0;
-	const float g = 17.0;
-	const float h = 23.0;
+	const float a = 2.0f;
+	const float b = 3.0f;
+	const float c = 5.0f;
+	const float d = 7.0f;
+	const float e = 11.0f;
+	const float f = 13.0f;
+	const float g = 17.0f;
+	const float h = 23.0f;
 
 	{
 		vec2 v1 = vec2(a, b);

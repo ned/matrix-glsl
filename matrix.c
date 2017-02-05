@@ -106,27 +106,27 @@ vec4f2v2(float x, float y, vec2 v) {
 mat2
 mat2f1(float x) {
 	return (mat2) {{
-		vec2(x, 0.0),
-		vec2(0.0, x),
+		vec2(x, 0.0f),
+		vec2(0.0f, x),
 	}};
 }
 
 mat3
 mat3f1(float x) {
 	return (mat3) {{
-		vec3(x, 0.0, 0.0),
-		vec3(0.0, x, 0.0),
-		vec3(0.0, 0.0, x),
+		vec3(x, 0.0f, 0.0f),
+		vec3(0.0f, x, 0.0f),
+		vec3(0.0f, 0.0f, x),
 	}};
 }
 
 mat4
 mat4f1(float x) {
 	return (mat4) {{
-		vec4(x, 0.0, 0.0, 0.0),
-		vec4(0.0, x, 0.0, 0.0),
-		vec4(0.0, 0.0, x, 0.0),
-		vec4(0.0, 0.0, 0.0, x),
+		vec4(x, 0.0f, 0.0f, 0.0f),
+		vec4(0.0f, x, 0.0f, 0.0f),
+		vec4(0.0f, 0.0f, x, 0.0f),
+		vec4(0.0f, 0.0f, 0.0f, x),
 	}};
 }
 
@@ -156,29 +156,29 @@ mat4v4(vec4 a, vec4 b, vec4 c, vec4 d) {
 mat3
 mat3m2(mat2 m) {
 	return (mat3) {{
-		vec3(m.cols[0], 0),
-		vec3(m.cols[1], 0),
-		vec3(0.0, 0.0, 1.0),
+		vec3(m.cols[0], 0.0f),
+		vec3(m.cols[1], 0.0f),
+		vec3(0.0f, 0.0f, 1.0f),
 	}};
 }
 
 mat4
 mat4m2(mat2 m) {
 	return (mat4) {{
-		vec4(m.cols[0], 0.0, 0.0),
-		vec4(m.cols[1], 0.0, 0.0),
-		vec4(0.0, 0.0, 1.0, 0.0),
-		vec4(0.0, 0.0, 0.0, 1.0),
+		vec4(m.cols[0], 0.0f, 0.0f),
+		vec4(m.cols[1], 0.0f, 0.0f),
+		vec4(0.0f, 0.0f, 1.0f, 0.0f),
+		vec4(0.0f, 0.0f, 0.0f, 1.0f),
 	}};
 }
 
 mat4
 mat4m3(mat3 m) {
 	return (mat4) {{
-		vec4(m.cols[0], 0),
-		vec4(m.cols[1], 0),
-		vec4(m.cols[2], 0),
-		vec4(0.0, 0.0, 0.0, 1.0),
+		vec4(m.cols[0], 0.0f),
+		vec4(m.cols[1], 0.0f),
+		vec4(m.cols[2], 0.0f),
+		vec4(0.0f, 0.0f, 0.0f, 1.0f),
 	}};
 }
 
