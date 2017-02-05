@@ -583,7 +583,7 @@ test_dot_product(void) {
 }
 
 int
-main(int argc, char **argv) {
+main(void) {
 	test_vector_constructors();
 	test_matrix_constructors();
 	test_matrix_mult();
