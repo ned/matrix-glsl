@@ -195,7 +195,7 @@ mat2f4(
 		vec2(x1, y1),
 		vec2(x2, y2),
 	}};
-};
+}
 
 mat3
 mat3f9(
@@ -208,7 +208,7 @@ mat3f9(
 		vec3(x2, y2, z2),
 		vec3(x3, y3, z3),
 	}};
-};
+}
 
 mat4
 mat4f16(
@@ -223,7 +223,7 @@ mat4f16(
 		vec4(x3, y3, z3, w3),
 		vec4(x4, y4, z4, w4),
 	}};
-};
+}
 
 /*
  * Dot product
