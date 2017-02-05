@@ -15,6 +15,7 @@
 #include <stdbool.h>
 
 #define M_SWIZZLE
+#define pure __attribute__((const))
 
 typedef float v4f_t __attribute__((vector_size (sizeof(float) * 4)));
 /*
@@ -101,31 +102,31 @@ typedef union mat3 mat3;
 typedef union mat4 mat4;
 
 /* Set all components to the same value */
-vec2 vec2f1(float);
-vec3 vec3f1(float);
-vec4 vec4f1(float);
+pure vec2 vec2f1(float);
+pure vec3 vec3f1(float);
+pure vec4 vec4f1(float);
 
 /* Set each component to the given value */
-vec2 vec2f2(float, float);
-vec3 vec3f3(float, float, float);
-vec4 vec4f4(float, float, float, float);
+pure vec2 vec2f2(float, float);
+pure vec3 vec3f3(float, float, float);
+pure vec4 vec4f4(float, float, float, float);
 
 /*
  * Fill from other vectors
  */
 
-vec2 vec2v3(vec3);
-vec2 vec2v4(vec4);
+pure vec2 vec2v3(vec3);
+pure vec2 vec2v4(vec4);
 
-vec3 vec3v2f1(vec2, float);
-vec3 vec3f1v2(float, vec2);
-vec3 vec3v4(vec4);
+pure vec3 vec3v2f1(vec2, float);
+pure vec3 vec3f1v2(float, vec2);
+pure vec3 vec3v4(vec4);
 
-vec4 vec4v3f1(vec3, float);
-vec4 vec4f1v3(float, vec3);
-vec4 vec4v2v2(vec2, vec2);
-vec4 vec4v2f2(vec2, float, float);
-vec4 vec4f2v2(float, float, vec2);
+pure vec4 vec4v3f1(vec3, float);
+pure vec4 vec4f1v3(float, vec3);
+pure vec4 vec4v2v2(vec2, vec2);
+pure vec4 vec4v2f2(vec2, float, float);
+pure vec4 vec4f2v2(float, float, vec2);
 
 /*
  * Using default (rather than float) so that number literals are
@@ -178,40 +179,40 @@ vec4 vec4f2v2(float, float, vec2);
     , vec4: FN ## v4                    \
     )
 
-float dotv2(vec2, vec2);
-float dotv3(vec3, vec3);
-float dotv4(vec4, vec4);
+pure float dotv2(vec2, vec2);
+pure float dotv3(vec3, vec3);
+pure float dotv4(vec4, vec4);
 #define dot(A, B) GENERIC_VEC(dot, A)(A, B)
 
-float lengthv2(vec2);
-float lengthv3(vec3);
-float lengthv4(vec4);
+pure float lengthv2(vec2);
+pure float lengthv3(vec3);
+pure float lengthv4(vec4);
 #define length(A) GENERIC_VEC(length, A)(A)
 
-vec2 normalizev2(vec2);
-vec3 normalizev3(vec3);
-vec4 normalizev4(vec4);
+pure vec2 normalizev2(vec2);
+pure vec3 normalizev3(vec3);
+pure vec4 normalizev4(vec4);
 #define normalize(A) GENERIC_VEC(normalize, A)(A)
 
 /* Diagonal matrix with the diagonal elements all of the given value */
-mat2 mat2f1(float);
-mat3 mat3f1(float);
-mat4 mat4f1(float);
+pure mat2 mat2f1(float);
+pure mat3 mat3f1(float);
+pure mat4 mat4f1(float);
 
 /* Fills matrix with the values from the smaller matrix, starting in the upper left */
-mat3 mat3m2(mat2);
-mat4 mat4m2(mat2);
-mat4 mat4m3(mat3);
+pure mat3 mat3m2(mat2);
+pure mat4 mat4m2(mat2);
+pure mat4 mat4m3(mat3);
 
 /* Fills columns from vectors */
-mat2 mat2v2(vec2, vec2);
-mat3 mat3v3(vec3, vec3, vec3);
-mat4 mat4v4(vec4, vec4, vec4, vec4);
+pure mat2 mat2v2(vec2, vec2);
+pure mat3 mat3v3(vec3, vec3, vec3);
+pure mat4 mat4v4(vec4, vec4, vec4, vec4);
 
 /* Fills matrix directly - column major */
-mat2 mat2f4(float, float, float, float);
-mat3 mat3f9(float, float, float, float, float, float, float, float, float);
-mat4 mat4f16(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
+pure mat2 mat2f4(float, float, float, float);
+pure mat3 mat3f9(float, float, float, float, float, float, float, float, float);
+pure mat4 mat4f16(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
 
 #define MAT2_NARGS_1(A) _Generic((A) \
     , default:   mat2f1              \
@@ -265,12 +266,12 @@ mat4 mat4f16(float, float, float, float, float, float, float, float, float, floa
     , mat4: FN ## m4                    \
     )
 
-mat2 transposem2(mat2);
-mat3 transposem3(mat3);
-mat4 transposem4(mat4);
+pure mat2 transposem2(mat2);
+pure mat3 transposem3(mat3);
+pure mat4 transposem4(mat4);
 #define transpose(M) GENERIC_MAT(transpose, M)(M)
 
-mat2 multm2(mat2, mat2);
-mat3 multm3(mat3, mat3);
-mat4 multm4(mat4, mat4);
+pure mat2 multm2(mat2, mat2);
+pure mat3 multm3(mat3, mat3);
+pure mat4 multm4(mat4, mat4);
 #define mult(M, N) GENERIC_MAT(mult, M)(M, N)

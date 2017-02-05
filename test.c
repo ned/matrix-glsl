@@ -12,12 +12,12 @@
     , mat4: FN ## m4                    \
     )
 
-bool equalsv2(vec2, vec2);
-bool equalsv3(vec3, vec3);
-bool equalsv4(vec4, vec4);
-bool equalsm2(mat2, mat2);
-bool equalsm3(mat3, mat3);
-bool equalsm4(mat4, mat4);
+pure bool equalsv2(vec2, vec2);
+pure bool equalsv3(vec3, vec3);
+pure bool equalsv4(vec4, vec4);
+pure bool equalsm2(mat2, mat2);
+pure bool equalsm3(mat3, mat3);
+pure bool equalsm4(mat4, mat4);
 #define equals(A, B) GENERIC_VEC_MAT(equals, A)(A, B)
 
 

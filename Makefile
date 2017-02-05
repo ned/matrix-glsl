@@ -5,6 +5,7 @@ CFLAGS+=-Wfloat-equal
 CFLAGS+=-Wshadow
 CFlAGS+=-Wconversion
 CFLAGS+=-O2
+CFLAGS+=-Wsuggest-attribute=pure -Wsuggest-attribute=const
 
 LDLIBS=-lm
 
@@ -13,4 +14,4 @@ LDLIBS=-lm
 .INTERMEDIATE: matrix.o
 
 test: test.c matrix.o
-	$(CC) $(CFLAGS) -Wno-float-equal $(LDLIBS) $^ -o $@
+	$(CC) $(CFLAGS) -Wno-float-equal -Wno-suggest-attribute=pure $(LDLIBS) $^ -o $@
