@@ -101,6 +101,15 @@ typedef union mat2 mat2;
 typedef union mat3 mat3;
 typedef union mat4 mat4;
 
+// Uses a funky trick to overload the function based on the number of arguments
+#define COUNT_ARGS_(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, X, ...) X
+#define COUNT_ARGS(...) COUNT_ARGS_(__VA_ARGS__, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+
+// Have to add some extra levels to concatenate properly
+#define CONCAT_(A, B) A ## B
+#define CONCAT(A, B) CONCAT_(A, B)
+#define OVERLOAD_ARGS(F, ...) CONCAT(F, COUNT_ARGS(__VA_ARGS__))(__VA_ARGS__)
+
 /* Set all components to the same value */
 pure vec2 vec2f1(float);
 pure vec3 vec3f1(float);
@@ -161,15 +170,6 @@ pure vec4 vec4f2v2(float, float, vec2);
     , float:  vec4f2v2                     \
     )(A, B, C)
 #define VEC4_ARGS_4(A, B, C, D) vec4f4(A, B, C, D)
-
-// Uses a funky trick to overload the function based on the number of arguments
-#define COUNT_ARGS_(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, X, ...) X
-#define COUNT_ARGS(...) COUNT_ARGS_(__VA_ARGS__, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
-
-// Have to add some extra levels to concatenate properly
-#define CONCAT_(A, B) A ## B
-#define CONCAT(A, B) CONCAT_(A, B)
-#define OVERLOAD_ARGS(F, ...) CONCAT(F, COUNT_ARGS(__VA_ARGS__))(__VA_ARGS__)
 
 #define vec2(...) OVERLOAD_ARGS(VEC2_ARGS_, __VA_ARGS__)
 #define vec3(...) OVERLOAD_ARGS(VEC3_ARGS_, __VA_ARGS__)
