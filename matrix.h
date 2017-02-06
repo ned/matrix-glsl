@@ -163,15 +163,17 @@ pure vec4 vec4f2v2(float, float, vec2);
 #define VEC4_ARGS_4(A, B, C, D) vec4f4(A, B, C, D)
 
 // Uses a funky trick to overload the function based on the number of arguments
-#define OVERLOAD_ARGS_16(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, X, ...) X
-#define OVERLOAD_ARGS_9(_1, _2, _3, _4, _5, _6, _7, _8, _9, X, ...) X
-#define OVERLOAD_ARGS_4(_1, _2, _3, _4, X, ...) X
-#define OVERLOAD_ARGS_3(_1, _2, _3, X, ...) X
-#define OVERLOAD_ARGS_2(_1, _2, X, ...) X
+#define COUNT_ARGS_(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, X, ...) X
+#define COUNT_ARGS(...) COUNT_ARGS_(__VA_ARGS__, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 
-#define vec2(...) OVERLOAD_ARGS_2(__VA_ARGS__, VEC2_ARGS_2, VEC2_ARGS_1)(__VA_ARGS__)
-#define vec3(...) OVERLOAD_ARGS_3(__VA_ARGS__, VEC3_ARGS_3, VEC3_ARGS_2, VEC3_ARGS_1)(__VA_ARGS__)
-#define vec4(...) OVERLOAD_ARGS_4(__VA_ARGS__, VEC4_ARGS_4, VEC4_ARGS_3, VEC4_ARGS_2, VEC4_ARGS_1)(__VA_ARGS__)
+// Have to add some extra levels to concatenate properly
+#define CONCAT_(A, B) A ## B
+#define CONCAT(A, B) CONCAT_(A, B)
+#define OVERLOAD_ARGS(F, ...) CONCAT(F, COUNT_ARGS(__VA_ARGS__))(__VA_ARGS__)
+
+#define vec2(...) OVERLOAD_ARGS(VEC2_ARGS_, __VA_ARGS__)
+#define vec3(...) OVERLOAD_ARGS(VEC3_ARGS_, __VA_ARGS__)
+#define vec4(...) OVERLOAD_ARGS(VEC4_ARGS_, __VA_ARGS__)
 
 #define GENERIC_VEC(FN, A) _Generic((A) \
     , vec2: FN ## v2                    \
@@ -240,7 +242,6 @@ pure mat4 mat4f16(float, float, float, float, float, float, float, float, float,
     , float:   mat3f9                     \
     )(A, __VA_ARGS__)
 
-
 #define MAT4_ARGS_1(A) _Generic((A) \
     , float:   mat4f1                \
     , mat2:  mat4m2                  \
@@ -255,9 +256,9 @@ pure mat4 mat4f16(float, float, float, float, float, float, float, float, float,
     , float:   mat4f16                     \
     )(A, __VA_ARGS__)
 
-#define mat2(...) OVERLOAD_ARGS_4(__VA_ARGS__, MAT2_ARGS_4, MAT2_ARGS_3, MAT2_ARGS_2, MAT2_ARGS_1)(__VA_ARGS__)
-#define mat3(...) OVERLOAD_ARGS_9(__VA_ARGS__, MAT3_ARGS_9, MAT3_ARGS_8, MAT3_ARGS_7, MAT3_ARGS_6, MAT3_ARGS_5, MAT3_ARGS_4, MAT3_ARGS_3, MAT3_ARGS_2, MAT3_ARGS_1)(__VA_ARGS__)
-#define mat4(...) OVERLOAD_ARGS_16(__VA_ARGS__, MAT4_ARGS_16, MAT4_ARGS_15, MAT4_ARGS_14, MAT4_ARGS_13, MAT4_ARGS_12, MAT4_ARGS_11, MAT4_ARGS_10, MAT4_ARGS_9, MAT4_ARGS_8, MAT4_ARGS_7, MAT4_ARGS_6, MAT4_ARGS_5, MAT4_ARGS_4, MAT4_ARGS_3, MAT4_ARGS_2, MAT4_ARGS_1)(__VA_ARGS__)
+#define mat2(...) OVERLOAD_ARGS(MAT2_ARGS_, __VA_ARGS__)
+#define mat3(...) OVERLOAD_ARGS(MAT3_ARGS_, __VA_ARGS__)
+#define mat4(...) OVERLOAD_ARGS(MAT4_ARGS_, __VA_ARGS__)
 
 
 #define GENERIC_MAT(FN, A) _Generic((A) \
