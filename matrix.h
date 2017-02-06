@@ -108,7 +108,8 @@ typedef union mat4 mat4;
 // Have to add some extra levels to concatenate properly
 #define CONCAT_(A, B) A ## B
 #define CONCAT(A, B) CONCAT_(A, B)
-#define OVERLOAD_ARGS(F, ...) CONCAT(F, COUNT_ARGS(__VA_ARGS__))(__VA_ARGS__)
+#define GET_OVERLOADED(F, ...) CONCAT(F, COUNT_ARGS(__VA_ARGS__))(__VA_ARGS__)
+#define OVERLOAD_ARGS(F, ...) GET_OVERLOADED(F, __VA_ARGS__)(__VA_ARGS__)
 
 /* Set all components to the same value */
 pure vec2 vec2f1(float);
@@ -141,30 +142,30 @@ pure vec4 vec4f2v2(float, float, vec2);
     , float: vec2f1                                            \
     , vec3:  vec2v3                                            \
     , vec4:  vec2v4                                            \
-    )(A)
-#define VEC2_ARGS_2(A, B) vec2f2(A, B)
+    )
+#define VEC2_ARGS_2(A, B) vec2f2
 
 #define VEC3_ARGS_1(A) _Generic((A)                            \
     , float: vec3f1                                            \
     , vec4:  vec3v4                                            \
-    )(A)
+    )
 #define VEC3_ARGS_2(A, B) _Generic((A)                         \
     , vec2:  vec3v2f1                                          \
     , float: vec3f1v2                                          \
-    )(A, B)
-#define VEC3_ARGS_3(A, B, C) vec3f3(A, B, C)
+    )
+#define VEC3_ARGS_3(A, B, C) vec3f3
 
-#define VEC4_ARGS_1(A) vec4f1(A)
+#define VEC4_ARGS_1(A) vec4f1
 #define VEC4_ARGS_2(A, B) _Generic((A)                         \
     , vec2:  vec4v2v2                                          \
     , vec3:  vec4v3f1                                          \
     , float: vec4f1v3                                          \
-    )(A, B)
+    )
 #define VEC4_ARGS_3(A, B, C) _Generic((A)                      \
     , vec2:  vec4v2f2                                          \
     , float: vec4f2v2                                          \
-    )(A, B, C)
-#define VEC4_ARGS_4(A, B, C, D) vec4f4(A, B, C, D)
+    )
+#define VEC4_ARGS_4(A, B, C, D) vec4f4
 
 #define vec2(...) OVERLOAD_ARGS(VEC2_ARGS_, __VA_ARGS__)
 #define vec3(...) OVERLOAD_ARGS(VEC3_ARGS_, __VA_ARGS__)
@@ -213,44 +214,44 @@ pure mat4 mat4f16(float, float, float, float, float, float, float, float, float,
 
 #define MAT2_ARGS_1(A) _Generic((A)                            \
     , float: mat2f1                                            \
-    )(A)
+    )
 
 #define MAT2_ARGS_2(A, B) _Generic((A)                         \
     , vec2: mat2v2                                             \
-    )(A, B)
+    )
 
 #define MAT2_ARGS_4(A, ...) _Generic((A)                       \
     , float: mat2f4                                            \
-    )(A, __VA_ARGS__)
+    )
 
 
 #define MAT3_ARGS_1(A) _Generic((A)                            \
     , float: mat3f1                                            \
     , mat2:  mat3m2                                            \
-    )(A)
+    )
 
 #define MAT3_ARGS_3(A, B, C) _Generic((A)                      \
     , vec3: mat3v3                                             \
-    )(A, B, C)
+    )
 
 #define MAT3_ARGS_9(A, ...) _Generic((A)                       \
     , float: mat3f9                                            \
-    )(A, __VA_ARGS__)
+    )
 
 
 #define MAT4_ARGS_1(A) _Generic((A)                            \
     , float: mat4f1                                            \
     , mat2:  mat4m2                                            \
     , mat3:  mat4m3                                            \
-    )(A)
+    )
 
 #define MAT4_ARGS_4(A, B, C, D) _Generic((A)                   \
     , vec4: mat4v4                                             \
-    )(A, B, C, D)
+    )
 
 #define MAT4_ARGS_16(A, ...) _Generic((A)                      \
     , float: mat4f16                                           \
-    )(A, __VA_ARGS__)
+    )
 
 #define mat2(...) OVERLOAD_ARGS(MAT2_ARGS_, __VA_ARGS__)
 #define mat3(...) OVERLOAD_ARGS(MAT3_ARGS_, __VA_ARGS__)
