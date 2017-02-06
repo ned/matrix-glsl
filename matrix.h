@@ -137,11 +137,6 @@ pure vec4 vec4v2v2(vec2, vec2);
 pure vec4 vec4v2f2(vec2, float, float);
 pure vec4 vec4f2v2(float, float, vec2);
 
-/*
- * Using default (rather than float) so that number literals are
- * converted to floats.
- */
-
 #define VEC2_ARGS_1(A) _Generic((A)    \
     , float: vec2f1                     \
     , vec3:  vec2v3                     \
