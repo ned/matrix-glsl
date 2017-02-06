@@ -137,32 +137,32 @@ pure vec4 vec4v2v2(vec2, vec2);
 pure vec4 vec4v2f2(vec2, float, float);
 pure vec4 vec4f2v2(float, float, vec2);
 
-#define VEC2_ARGS_1(A) _Generic((A)    \
-    , float: vec2f1                     \
-    , vec3:  vec2v3                     \
-    , vec4:  vec2v4                     \
+#define VEC2_ARGS_1(A) _Generic((A)                            \
+    , float: vec2f1                                            \
+    , vec3:  vec2v3                                            \
+    , vec4:  vec2v4                                            \
     )(A)
 #define VEC2_ARGS_2(A, B) vec2f2(A, B)
 
-#define VEC3_ARGS_1(A) _Generic((A)    \
-    , float: vec3f1                     \
-    , vec4:  vec3v4                     \
+#define VEC3_ARGS_1(A) _Generic((A)                            \
+    , float: vec3f1                                            \
+    , vec4:  vec3v4                                            \
     )(A)
-#define VEC3_ARGS_2(A, B) _Generic((A) \
-    , vec2: vec3v2f1                    \
-    , float:  vec3f1v2                  \
+#define VEC3_ARGS_2(A, B) _Generic((A)                         \
+    , vec2:  vec3v2f1                                          \
+    , float: vec3f1v2                                          \
     )(A, B)
 #define VEC3_ARGS_3(A, B, C) vec3f3(A, B, C)
 
 #define VEC4_ARGS_1(A) vec4f1(A)
-#define VEC4_ARGS_2(A, B) _Generic((A) \
-    , vec2: vec4v2v2                    \
-    , vec3: vec4v3f1                    \
-    , float:  vec4f1v3                  \
+#define VEC4_ARGS_2(A, B) _Generic((A)                         \
+    , vec2:  vec4v2v2                                          \
+    , vec3:  vec4v3f1                                          \
+    , float: vec4f1v3                                          \
     )(A, B)
-#define VEC4_ARGS_3(A, B, C) _Generic((A) \
-    , vec2: vec4v2f2                       \
-    , float:  vec4f2v2                     \
+#define VEC4_ARGS_3(A, B, C) _Generic((A)                      \
+    , vec2:  vec4v2f2                                          \
+    , float: vec4f2v2                                          \
     )(A, B, C)
 #define VEC4_ARGS_4(A, B, C, D) vec4f4(A, B, C, D)
 
@@ -170,10 +170,10 @@ pure vec4 vec4f2v2(float, float, vec2);
 #define vec3(...) OVERLOAD_ARGS(VEC3_ARGS_, __VA_ARGS__)
 #define vec4(...) OVERLOAD_ARGS(VEC4_ARGS_, __VA_ARGS__)
 
-#define GENERIC_VEC(FN, A) _Generic((A) \
-    , vec2: FN ## v2                    \
-    , vec3: FN ## v3                    \
-    , vec4: FN ## v4                    \
+#define GENERIC_VEC(FN, A) _Generic((A)                        \
+    , vec2: FN ## v2                                           \
+    , vec3: FN ## v3                                           \
+    , vec4: FN ## v4                                           \
     )
 
 pure float dotv2(vec2, vec2);
@@ -211,44 +211,45 @@ pure mat2 mat2f4(float, float, float, float);
 pure mat3 mat3f9(float, float, float, float, float, float, float, float, float);
 pure mat4 mat4f16(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
 
-#define MAT2_ARGS_1(A) _Generic((A) \
-    , float:   mat2f1                \
+#define MAT2_ARGS_1(A) _Generic((A)                            \
+    , float: mat2f1                                            \
     )(A)
 
-#define MAT2_ARGS_2(A, B) _Generic((A) \
-    , vec2: mat2v2                      \
+#define MAT2_ARGS_2(A, B) _Generic((A)                         \
+    , vec2: mat2v2                                             \
     )(A, B)
 
-#define MAT2_ARGS_4(A, ...) _Generic((A) \
-    , float:   mat2f4                     \
+#define MAT2_ARGS_4(A, ...) _Generic((A)                       \
+    , float: mat2f4                                            \
     )(A, __VA_ARGS__)
 
 
-#define MAT3_ARGS_1(A) _Generic((A) \
-    , float:   mat3f1                \
-    , mat2:  mat3m2                  \
+#define MAT3_ARGS_1(A) _Generic((A)                            \
+    , float: mat3f1                                            \
+    , mat2:  mat3m2                                            \
     )(A)
 
-#define MAT3_ARGS_3(A, B, C) _Generic((A) \
-    , vec3:  mat3v3                        \
+#define MAT3_ARGS_3(A, B, C) _Generic((A)                      \
+    , vec3: mat3v3                                             \
     )(A, B, C)
 
-#define MAT3_ARGS_9(A, ...) _Generic((A) \
-    , float:   mat3f9                     \
+#define MAT3_ARGS_9(A, ...) _Generic((A)                       \
+    , float: mat3f9                                            \
     )(A, __VA_ARGS__)
 
-#define MAT4_ARGS_1(A) _Generic((A) \
-    , float:   mat4f1                \
-    , mat2:  mat4m2                  \
-    , mat3:  mat4m3                  \
+
+#define MAT4_ARGS_1(A) _Generic((A)                            \
+    , float: mat4f1                                            \
+    , mat2:  mat4m2                                            \
+    , mat3:  mat4m3                                            \
     )(A)
 
-#define MAT4_ARGS_4(A, B, C, D) _Generic((A) \
-    , vec4: mat4v4                            \
+#define MAT4_ARGS_4(A, B, C, D) _Generic((A)                   \
+    , vec4: mat4v4                                             \
     )(A, B, C, D)
 
-#define MAT4_ARGS_16(A, ...) _Generic((A) \
-    , float:   mat4f16                     \
+#define MAT4_ARGS_16(A, ...) _Generic((A)                      \
+    , float: mat4f16                                           \
     )(A, __VA_ARGS__)
 
 #define mat2(...) OVERLOAD_ARGS(MAT2_ARGS_, __VA_ARGS__)
@@ -256,10 +257,10 @@ pure mat4 mat4f16(float, float, float, float, float, float, float, float, float,
 #define mat4(...) OVERLOAD_ARGS(MAT4_ARGS_, __VA_ARGS__)
 
 
-#define GENERIC_MAT(FN, A) _Generic((A) \
-    , mat2: FN ## m2                    \
-    , mat3: FN ## m3                    \
-    , mat4: FN ## m4                    \
+#define GENERIC_MAT(FN, A) _Generic((A)                        \
+    , mat2: FN ## m2                                           \
+    , mat3: FN ## m3                                           \
+    , mat4: FN ## m4                                           \
     )
 
 pure mat2 transposem2(mat2);
