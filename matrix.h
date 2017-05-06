@@ -12,6 +12,7 @@
  *
  */
 
+#include <assert.h>
 #include <stdbool.h>
 
 #define M_SWIZZLE
@@ -36,6 +37,7 @@ union vec2 {
 
 	/* no rgba for vec2 */
 };
+static_assert(sizeof(union vec2) == 8, "wrong size for vec2");
 
 union vec3 {
 	v3f_t _v;
@@ -48,6 +50,7 @@ union vec3 {
 		float r, g, b;
 	};
 };
+static_assert(sizeof(union vec3) == 16, "wrong size for vec3");
 
 union vec4 {
 	v4f_t _v;
@@ -75,6 +78,7 @@ union vec4 {
 	};
 #endif
 };
+static_assert(sizeof(union vec4) == 16, "wrong size for vec4");
 
 typedef union vec2 vec2;
 typedef union vec3 vec3;
@@ -88,14 +92,17 @@ typedef union vec4 vec4;
 union mat2 {
 	vec2 cols[2];
 };
+static_assert(sizeof(union mat2) == 8 * 2, "wrong size for mat2");
 
 union mat3 {
 	vec3 cols[3];
 };
+static_assert(sizeof(union mat3) == 16 * 3, "wrong size for mat3");
 
 union mat4 {
 	vec4 cols[4];
 };
+static_assert(sizeof(union mat4) == 16 * 4, "wrong size for mat4");
 
 typedef union mat2 mat2;
 typedef union mat3 mat3;

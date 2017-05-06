@@ -1,6 +1,6 @@
 CC=gcc
 
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -std=c11
 CFLAGS+=-Wfloat-equal
 CFLAGS+=-Wshadow
 CFlAGS+=-Wconversion
