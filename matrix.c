@@ -320,7 +320,7 @@ transposem4(mat4 m) {
 
 mat2
 multm2(mat2 m, mat2 n) {
-	mat2 mt = transpose(m);
+	const mat2 mt = transpose(m);
 
 	return (mat2) {{
 		vec2(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0])),
@@ -330,7 +330,7 @@ multm2(mat2 m, mat2 n) {
 
 mat3
 multm3(mat3 m, mat3 n) {
-	mat3 mt = transpose(m);
+	const mat3 mt = transpose(m);
 
 	return (mat3) {{
 		vec3(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0])),
@@ -341,7 +341,7 @@ multm3(mat3 m, mat3 n) {
 
 mat4
 multm4(mat4 m, mat4 n) {
-	mat4 mt = transpose(m);
+	const mat4 mt = transpose(m);
 
 	return (mat4) {{
 		vec4(dot(mt.cols[0], n.cols[0]), dot(mt.cols[1], n.cols[0]), dot(mt.cols[2], n.cols[0]), dot(mt.cols[3], n.cols[0])),
