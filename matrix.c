@@ -350,3 +350,63 @@ multm4(mat4 m, mat4 n) {
 		vec4(dot(mt.cols[0], n.cols[3]), dot(mt.cols[1], n.cols[3]), dot(mt.cols[2], n.cols[3]), dot(mt.cols[3], n.cols[3])),
 	}};
 }
+
+/*
+ * Matrix determinant
+ */
+
+float
+determinantm2(const mat2 m) {
+	const float a = m.cols[0].x;
+	const float d = m.cols[1].y;
+	const float c = m.cols[0].y;
+	const float b = m.cols[1].x;
+
+	return a * d - b * c;
+}
+
+float
+determinantm3(const mat3 m) {
+	const float det =
+		m.cols[0].x * determinant(mat2(
+			m.cols[1].y, m.cols[1].z,
+			m.cols[2].y, m.cols[2].z
+		))
+		- m.cols[1].x * determinant(mat2(
+			m.cols[0].y, m.cols[0].z,
+			m.cols[2].y, m.cols[2].z
+		))
+		+ m.cols[2].x * determinant(mat2(
+			m.cols[0].y, m.cols[0].z,
+			m.cols[1].y, m.cols[1].z
+		));
+
+	return det;
+}
+
+float
+determinantm4(const mat4 m) {
+	const float det =
+		m.cols[0].x * determinant(mat3(
+			m.cols[1].y, m.cols[1].z, m.cols[1].w,
+			m.cols[2].y, m.cols[2].z, m.cols[2].w,
+			m.cols[3].y, m.cols[3].z, m.cols[3].w
+		))
+		- m.cols[1].x * determinant(mat3(
+			m.cols[0].y, m.cols[0].z, m.cols[0].w,
+			m.cols[2].y, m.cols[2].z, m.cols[2].w,
+			m.cols[3].y, m.cols[3].z, m.cols[3].w
+		))
+		+ m.cols[2].x * determinant(mat3(
+			m.cols[0].y, m.cols[0].z, m.cols[0].w,
+			m.cols[1].y, m.cols[1].z, m.cols[1].w,
+			m.cols[3].y, m.cols[3].z, m.cols[3].w
+		))
+		- m.cols[3].x * determinant(mat3(
+			m.cols[0].y, m.cols[0].z, m.cols[0].w,
+			m.cols[1].y, m.cols[1].z, m.cols[1].w,
+			m.cols[2].y, m.cols[2].z, m.cols[2].w
+		));
+
+	return det;
+}

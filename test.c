@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
 
 #include "matrix.h"
 
@@ -19,7 +19,6 @@ pure bool equalsm2(mat2, mat2);
 pure bool equalsm3(mat3, mat3);
 pure bool equalsm4(mat4, mat4);
 #define equals(A, B) GENERIC_VEC_MAT(equals, A)(A, B)
-
 
 /*
  * Equality functions
@@ -538,6 +537,49 @@ test_matrix_mult(void) {
 }
 
 void
+test_matrix_determinant(void) {
+	{
+		float d = determinant(mat2(
+			2.0f, -1.0f,
+			1.0f, 2.0f
+		));
+
+		assert(d == 5.0f);
+	}
+
+	{
+		float d = determinant(mat3(
+			-4.0f, 0.0f, 1.0f,
+			-3.0f, 2.0f, 4.0f,
+			3.0f, -2.0f, -1.0f
+		));
+
+		assert(d == -24.0f);
+	}
+
+	{
+		float d = determinant(mat3(
+			8.0f, 0.0f, -11.0f,
+			-3.0f, 9.0f, 4.0f,
+			3.0f, -2.0f, -10.0f
+		));
+
+		assert(d == -425.0f);
+	}
+
+	{
+		float d = determinant(mat4(
+			3.0f, 1.0f, 4.0f, 5.0f,
+			0.0f, 2.0f, 0.0f, 0.0f,
+			2.0f, 0.0f, 6.0f, 2.0f,
+			-1.0f, -2.0f, -3.0f, 0.0f
+		));
+
+		assert(d == 20.0f);
+	}
+}
+
+void
 test_dot_product(void) {
 	const float a = 2.0f;
 	const float b = 3.0f;
@@ -585,8 +627,11 @@ test_dot_product(void) {
 int
 main(void) {
 	test_vector_constructors();
+
 	test_matrix_constructors();
 	test_matrix_mult();
+	test_matrix_determinant();
+
 	test_dot_product();
 }
 

@@ -280,3 +280,8 @@ pure mat2 multm2(mat2, mat2);
 pure mat3 multm3(mat3, mat3);
 pure mat4 multm4(mat4, mat4);
 #define mult(M, N) GENERIC_MAT(mult, M)(M, N)
+
+pure float determinantm2(mat2);
+pure float determinantm3(mat3);
+pure float determinantm4(mat4);
+#define determinant(M) GENERIC_MAT(determinant, M)(M)
