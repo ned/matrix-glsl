@@ -410,3 +410,45 @@ determinantm4(const mat4 m) {
 
 	return det;
 }
+
+/*
+ * Calculate the inverse matrix.
+ *
+ * The algorithm used is based on the classical adjoint, as recommended by
+ * "3D Math Primer for Graphics and Game Development" (2nd ed) by Dunn and
+ * Parberry, section 6.2. The text argues that for small 2x2, 3x3 or 4x4
+ * matrices, the fact that this algorithm is branchless makes it superior
+ * to Gaussian elimination.
+ *
+ * The result is undefined if the matrix is non-invertible or is poorly
+ * conditioned (nearly non-invertible).
+ */
+mat4
+inversem4(const mat4 m) {
+	/* mutable */ mat4 inv = mat4(0.0f);
+
+	const float det = determinant(m);
+
+	for (int col = 0; col < 4; col++) {
+		for (int row = 0; row < 4; row++) {
+			const float sign = (row + col) % 2 == 0 ? 1.0f : -1.0f;
+			/* const float sign = powf(-1, row + col); */
+
+			const int j0 = 0 + (col <= 0);
+			const int j1 = 1 + (col <= 1);
+			const int j2 = 2 + (col <= 2);
+
+			const int i0 = 0 + (row <= 0);
+			const int i1 = 1 + (row <= 1);
+			const int i2 = 2 + (row <= 2);
+
+			inv.cols[col]._v[row] = sign * determinant(mat3(
+				m.cols[j0]._v[i0], m.cols[j0]._v[i1], m.cols[j0]._v[i2],
+				m.cols[j1]._v[i0], m.cols[j1]._v[i1], m.cols[j1]._v[i2],
+				m.cols[j2]._v[i0], m.cols[j2]._v[i1], m.cols[j2]._v[i2]
+			)) / det;
+		}
+	}
+
+	return transpose(inv);
+}

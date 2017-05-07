@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <math.h>
 #include <stdio.h>
 
 #include "matrix.h"
@@ -11,6 +12,20 @@
     , mat3: FN ## m3                    \
     , mat4: FN ## m4                    \
     )
+
+/*
+ * Compare almost-equality of floats.
+ *
+ * Formula taken from https://www.python.org/dev/peps/pep-0485.
+ */
+static bool
+isclose_tol(float a, float b, float abs_tol) {
+	const float rel_tol = 1e-9f;
+/* 	const float abs_tol = 0.0f; */
+	assert(abs_tol >= 0.0);
+
+	return fabsf(a - b) <= fmaxf(rel_tol * fmaxf(fabsf(a), fabsf(b)), abs_tol);
+}
 
 pure bool equalsv2(vec2, vec2);
 pure bool equalsv3(vec3, vec3);
@@ -36,7 +51,12 @@ equalsv3(vec3 a, vec3 b) {
 
 bool
 equalsv4(vec4 a, vec4 b) {
-	return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+	// use a small but non-zero absolute tolerance since this is just used for unit testing
+	return
+		isclose_tol(a.x, b.x, 1e-6f) &&
+		isclose_tol(a.y, b.y, 1e-6f) &&
+		isclose_tol(a.z, b.z, 1e-6f) &&
+		isclose_tol(a.w, b.w, 1e-6f);
 }
 
 bool
@@ -580,6 +600,34 @@ test_matrix_determinant(void) {
 }
 
 void
+test_matrix_inverse(void) {
+	// The inverse of the identity is the identity
+	{
+		mat4 m = mat4(
+			1.0f, 0.0f, 0.0f, 0.0f,
+			0.0f, 1.0f, 0.0f, 0.0f,
+			0.0f, 0.0f, 1.0f, 0.0f,
+			0.0f, 0.0f, 0.0f, 1.0f
+		);
+
+		assert(equalsm4(m, inverse(m)));
+	}
+
+	// property: inverse(inverse(m)) == m
+	{
+		mat4 m = mat4(
+			-2.0f, 0.0f, 1.0f, 2.0f,
+			1.0f, 2.0f, 4.0f, -2.0f,
+			3.0f, -2.0f, -1.0f, 4.0f,
+			3.0f, -3.0f, -3.0f, -2.0f
+		);
+
+		// FIXME: this isn't exactly equal, as the algorithm isn't very stable
+		assert(equalsm4(m, inverse(inverse(m))));
+	}
+}
+
+void
 test_dot_product(void) {
 	const float a = 2.0f;
 	const float b = 3.0f;
@@ -631,6 +679,7 @@ main(void) {
 	test_matrix_constructors();
 	test_matrix_mult();
 	test_matrix_determinant();
+	test_matrix_inverse();
 
 	test_dot_product();
 }

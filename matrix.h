@@ -285,3 +285,7 @@ pure float determinantm2(mat2);
 pure float determinantm3(mat3);
 pure float determinantm4(mat4);
 #define determinant(M) GENERIC_MAT(determinant, M)(M)
+
+// We only support the inverse of a 4x4 matrix
+pure mat4 inversem4(mat4);
+#define inverse(M) inversem4(M)
