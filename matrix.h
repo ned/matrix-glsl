@@ -189,6 +189,8 @@ pure float dotv3(vec3, vec3);
 pure float dotv4(vec4, vec4);
 #define dot(A, B) GENERIC_VEC(dot, A)(A, B)
 
+pure vec3 cross(vec3, vec3);
+
 pure float lengthv2(vec2);
 pure float lengthv3(vec3);
 pure float lengthv4(vec4);

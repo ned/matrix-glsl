@@ -672,6 +672,16 @@ test_dot_product(void) {
 	}
 }
 
+void
+test_cross_product() {
+	vec3 a = vec3(1, 3, 4);
+	vec3 b = vec3(2, -5, 8);
+
+	vec3 expected = vec3(44, 0, -11);
+
+	assert(equals(cross(a, b), expected));
+}
+
 int
 main(void) {
 	test_vector_constructors();
@@ -682,5 +692,6 @@ main(void) {
 	test_matrix_inverse();
 
 	test_dot_product();
+	test_cross_product();
 }
 
