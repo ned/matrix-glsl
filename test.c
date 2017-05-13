@@ -628,6 +628,47 @@ test_matrix_inverse(void) {
 }
 
 void
+test_normalize(void) {
+	const float a = 2.0f;
+	const float b = 3.0f;
+	const float c = 5.0f;
+	const float d = 7.0f;
+
+	{
+		vec2 v = vec2(a, b);
+
+		float len = length(v);
+		vec2 result = normalize(v);
+		vec2 expected = vec2(v.x / len, v.y / len);
+
+		assert(equals(result, expected));
+		assert(length(result) == 1.0f);
+	}
+
+	{
+		vec3 v = vec3(a, b, c);
+
+		float len = length(v);
+		vec3 result = normalize(v);
+		vec3 expected = vec3(v.x / len, v.y / len, v.z / len);
+
+		assert(equals(result, expected));
+		assert(length(result) == 1.0f);
+	}
+
+	{
+		vec4 v = vec4(a, b, c, d);
+
+		float len = length(v);
+		vec4 result = normalize(v);
+		vec4 expected = vec4(v.x / len, v.y / len, v.z / len, v.w / len);
+
+		assert(equals(result, expected));
+		assert(length(result) == 1.0f);
+	}
+}
+
+void
 test_dot_product(void) {
 	const float a = 2.0f;
 	const float b = 3.0f;
@@ -691,6 +732,7 @@ main(void) {
 	test_matrix_determinant();
 	test_matrix_inverse();
 
+	test_normalize();
 	test_dot_product();
 	test_cross_product();
 }
