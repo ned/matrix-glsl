@@ -281,17 +281,23 @@ lengthv4(vec4 a) {
 
 vec2
 normalizev2(vec2 a) {
-	return (vec2) { a._v / length(a) };
+	const float len = length(a);
+
+	return vec2(a.x / len, a.y / len);
 }
 
 vec3
 normalizev3(vec3 a) {
-	return (vec3) { a._v / length(a) };
+	const float len = length(a);
+
+	return vec3(a.x / len, a.y / len, a.z / len);
 }
 
 vec4
 normalizev4(vec4 a) {
-	return (vec4) { a._v / length(a) };
+	const float len = length(a);
+
+	return vec4(a.x / len, a.y / len, a.z / len, a.w / len);
 }
 
 
