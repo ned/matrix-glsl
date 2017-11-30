@@ -1,3 +1,23 @@
+# Matrix Library for OpenGL Games
+
+The functions mimic the OpenGL Mathematics (GLM) C++ library and the OpenGL Shading Language (GLSL).
+
+In order to support overloading, the functions are actually function-like macros that wrap around C11 type-dependent `_Generic` selection, so that the same function name can be used regardless of the size of the vector or matrix.
+For example,
+
+```
+c = dot(a, b)
+```
+
+will work on two-, three- or four-dimensional vectors so long as they are both the same size.
+
+As in GLM and GLSL, matrices are column-major.
+
+Warning: this uses some very horrible macro hacks to mimic functions that are overloaded on the number and type of parameters.
+It'll produce error vomit if the wrong number of arguments or types are used.
+Please don't actually use anything like this in the real world.
+Thanks.
+
 # Vector Constructors
 
 Vectors can be constructed directly.
