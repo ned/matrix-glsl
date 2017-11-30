@@ -5,7 +5,7 @@ The functions mimic the OpenGL Mathematics (GLM) C++ library and the OpenGL Shad
 In order to support overloading, the functions are actually function-like macros that wrap around C11 type-dependent `_Generic` selection, so that the same function name can be used regardless of the size of the vector or matrix.
 For example,
 
-```
+```c
 c = dot(a, b)
 ```
 
@@ -22,7 +22,7 @@ Thanks.
 
 Vectors can be constructed directly.
 
-```{.c}
+```c
 vec2 a = vec2(1.0, 2.0);
 vec3 b = vec3(1.0, 2.0, 3.0);
 vec4 c = vec4(1.0, 2.0, 3.0, 4.0);
@@ -30,7 +30,7 @@ vec4 c = vec4(1.0, 2.0, 3.0, 4.0);
 
 Or all the components of the vector can be set to the same number.
 
-```{.c}
+```c
 vec2 a = vec2(1.0); // = vec2(1.0, 1.0);
 vec3 b = vec3(1.0); // = vec3(1.0, 1.0, 1.0);
 vec4 c = vec4(1.0); // = vec4(1.0, 1.0, 1.0, 1.0);
@@ -39,7 +39,7 @@ vec4 c = vec4(1.0); // = vec4(1.0, 1.0, 1.0, 1.0);
 A higher-dimensional vector can be converted to a lower-dimensional vector, which discards the higher-dimensional components.
 
 
-```{.c}
+```c
 vec4 a = vec4(1.0, 2.0, 3.0, 4.0);
 
 vec3 b = vec3(a); // = vec3(1.0, 2.0, 3.0);
@@ -50,7 +50,7 @@ vec2 d = vec2(b); // = vec2(1.0, 2.0);
 
 Or a lower-dimensional vector from a higher-dimensional one by supplying the remaining components.
 
-```{.c}
+```c
 vec2 a = vec2(1.0, 2.0);
 
 vec3 b = vec3(a, 3.0); // = vec3(1.0, 2.0, 3.0);
@@ -63,7 +63,7 @@ vec4 d = vec4(b, 4.0); // = vec4(1.0, 2.0, 3.0, 4.0);
 
 Given a single number, a matrix constructor creates a diagonal matrix.
 
-```{.c}
+```c
 mat2 id2x2 = mat2(1.0);
 /*
   ┌          ┐
@@ -94,7 +94,7 @@ mat4 id4x4 = mat4(1.0);
 
 Or a matrix can be filled directly, filling each *column* (not row) first.
 
-```{.c}
+```c
 mat2 m2x2 = mat2(
     1.0, 2.0, // first column
     3.0, 4.0  // second column
