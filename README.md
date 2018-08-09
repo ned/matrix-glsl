@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ned/matrix-glsl.svg?branch=master)](https://travis-ci.org/ned/matrix-glsl)
+
 # Matrix Library for OpenGL Games
 
 The functions mimic the OpenGL Mathematics (GLM) C++ library and the OpenGL Shading Language (GLSL).
