@@ -1,7 +1,21 @@
 language: c
-compiler:
-    - clang
-    - gcc
+matrix:
+    include:
+        - os: linux
+          addons:
+              apt:
+                  sources:
+                      - ubuntu-toolchain-r-test
+                  packages:
+                      - gcc-7
+          before_install: CC=gcc-7
+        - os: linux
+          addons:
+              apt:
+                  sources:
+                      - llvm-toolchain-trusty-5.0
+                  packages:
+                      - clang-5.0
+          before_install: CC=clang
 script:
-    - make
-    - ./test
+  - make test && ./test
