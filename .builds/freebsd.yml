@@ -1,0 +1,10 @@
+image: freebsd
+sources:
+    - https://git.sr.ht/~nedhoy/matrix-glsl
+tasks:
+    - build: |
+        cd matrix-glsl
+        make test
+    - test: |
+        cd matrix-glsl
+        ./test
