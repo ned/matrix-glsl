@@ -7,7 +7,7 @@ CFLAGS+=-O2
 LDLIBS=-lm
 
 test: test.o matrix.o
-	$(CC) -o $@ $^ $(LDLIBS)
+	$(CC) -o $@ test.o matrix.o $(LDLIBS)
 
 test.o: test.c
-	$(CC) $(CFLAGS) -Wno-float-equal $^ -c
+	$(CC) $(CFLAGS) -Wno-float-equal $< -c
